@@ -1,0 +1,7 @@
+local WorkspaceChildren = workspace.GetChildren()
+
+for i = 1, #WorkspaceChildren, 1 do
+
+print(WorkspaceChildren[i])
+
+end
