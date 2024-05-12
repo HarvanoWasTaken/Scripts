@@ -23,7 +23,8 @@ Dropped.ChildAdded:Connect(function(Part)
 	
 	button.MouseClick:Connect(function()
 		
-		Part:Clone()
-		
+		local cloned = Part:Clone()
+                cloned.Parent = Dropped
+
 	end)
 end)
