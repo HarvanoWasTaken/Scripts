@@ -1,5 +1,7 @@
 local Children = workspace:GetChildren() -- switch workspace to anything you want
 
+Print(Children[1].Parent.Name)
+
 for i = 1, #Children, 1 do
 
 print(Children[i])
