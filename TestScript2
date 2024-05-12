@@ -1,6 +1,6 @@
 local Children = workspace:GetChildren() -- switch workspace to anything you want
 
-Print(Children[1].Parent.Name)
+print("------------------")
 
 for i = 1, #Children, 1 do
 
