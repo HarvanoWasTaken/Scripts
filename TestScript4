@@ -1,10 +1,29 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript4"))()
 
 local Dropped = workspace.DroppedItems
+local plr = game.Players.LocalPlayer
+local char = plr.Character
+local HumRootPart = char.PrimaryPart
 
 Dropped.ChildAdded:Connect(function(Part)
+	local button = Instance.new("ClickDetector")
+	button.Parent = Part
+	
+	local gui = Instance.new("BillboardGui")
+	gui.AlwaysOnTop = true
+	gui.Size = UDim2.fromOffset(300, 75)
+	gui.Parent = Part
 
-local cloned = Part
-Cloned.Parent = Dropped
-
+	local textbox = Instance.new("TextButton")
+	textbox.Size = UDim2.fromScale(1, 1)
+	textbox.Text = Part.Name
+	textbox.TextScaled = true
+	textbox.Parent = gui
+	textbox.BackgroundTransparency = 0.5
+	
+	button.MouseClick:Connect(function()
+		
+		Part:Clone()
+		
+	end)
 end)
