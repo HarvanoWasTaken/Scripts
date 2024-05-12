@@ -6,3 +6,14 @@ for i = 1, #Children, 1 do
 
 print(Children[i].Name .. " Type:" .. Children[i].ClassName)
 end
+
+
+
+local Children = workspace.IDCIFGBOTA.Torso:GetChildren() -- switch workspace to anything you want
+
+print("------------------")
+
+for i = 1, #Children, 1 do
+
+print(Children[i].Name .. " Type:" .. Children[i].ClassName)
+end
