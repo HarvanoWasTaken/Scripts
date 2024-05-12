@@ -1,4 +1,4 @@
--- https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript2
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript2"))()
 
 local WorkspaceChildren = workspace.GetChildren()
 
