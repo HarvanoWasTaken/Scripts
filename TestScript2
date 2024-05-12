@@ -1,6 +1,6 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript2"))()
 
-local WorkspaceChildren = workspace.GetChildren()
+local WorkspaceChildren = workspace:GetChildren()
 
 for i = 1, #WorkspaceChildren, 1 do
 
