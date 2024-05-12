@@ -4,5 +4,5 @@ print("------------------")
 
 for i = 1, #Children, 1 do
 
-print(Children[i] .. " Type:" .. Children.ClassName)
+print(Children[i].Name .. " Type:" .. Children[i].ClassName)
 end
