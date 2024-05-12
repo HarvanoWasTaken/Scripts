@@ -1,0 +1,23 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript1"))()
+
+local plr = game.Players.LocalPlayer
+local plrGui = plr:WaitForChild("PlayerGui")
+local char = plr.Character
+
+local gui = Instance.new("ScreenGui")
+gui.Parent = plrGui
+
+local textbox = Instance.new("TextLabel")
+textbox.Parent = gui
+
+textbox.BackgroundColor3 = Color3.new(1, 1, 1)
+textbox.TextColor3 = Color3.new(0, 0, 0)
+textbox.TextScaled = true
+
+textbox.Size = UDim2.fromOffset(200, 100)
+textbox.Position = UDim2.fromScale(0.45, 0)
+
+	
+	while wait(1) do
+		textbox.Text = math.round(char.PrimaryPart.Position.X * 100) / 100 .. "," .. math.round(char.PrimaryPart.Position.Y * 100) / 100 .. "," .. math.round(char.PrimaryPart.Position.Z * 100) / 100
+	end
