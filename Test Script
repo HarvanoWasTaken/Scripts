@@ -2,6 +2,7 @@
 
 local plr = game.Players.LocalPlayer
 local plrGui = plr:WaitForChild("PlayerGui")
+local char = plr:WaitForChild("Character")
 
 local gui = Instance.new("ScreenGui")
 gui.Parent = plrGui
@@ -16,10 +17,7 @@ textbox.TextScaled = true
 textbox.Size = UDim2.fromOffset(200, 100)
 textbox.Position = UDim2.fromScale(0.45, 0)
 
-local char = plr.CharacterAdded:Connect(function(char)
 	
 	while wait(1) do
 		textbox.Text = math.round(char.PrimaryPart.Position.X * 100) / 100 .. "," .. math.round(char.PrimaryPart.Position.Y * 100) / 100 .. "," .. math.round(char.PrimaryPart.Position.Z * 100) / 100
 	end
-
-end)
