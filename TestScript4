@@ -1,0 +1,10 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript4"))()
+
+local Dropped = workspace.DroppedItems
+
+Dropped.ChildAdded:Connect(function(Part)
+
+local cloned = Part
+Cloned.Parent = Dropped
+
+end)
