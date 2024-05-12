@@ -1,9 +1,7 @@
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript2"))()
+local Children = workspace:GetChildren() -- switch workspace to anything you want
 
-local WorkspaceChildren = workspace:GetChildren()
+for i = 1, #Children, 1 do
 
-for i = 1, #WorkspaceChildren, 1 do
-
-print(WorkspaceChildren[i])
+print(Children[i])
 
 end
