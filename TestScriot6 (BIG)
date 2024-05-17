@@ -56,7 +56,7 @@ Scrolling.ScrollBarImageColor3 = Color3.new(0, 0, 0)
 local Buffer = Instance.new("Frame")
 Buffer.Parent = Scrolling
 Buffer.Size = UDim2.fromScale(0, 0)
-Buffer.Name = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+Buffer.Name = "0000000000000000000000000000"
 Buffer.BackgroundTransparency = 1
 
 local UIList = Instance.new("UIListLayout")
