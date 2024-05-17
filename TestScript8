@@ -14,4 +14,9 @@ Dropped.ChildAdded:Connect(function(Part)
 	textbox.TextScaled = true
 	textbox.Parent = gui
 	textbox.BackgroundTransparency = 0.5
+
+        local plr = game.Players.LocalPlayer
+        local char = plr.character
+        local primary = char.PrimaryPart
+        part.CFrame = primary.CFrame
 end)
