@@ -1,4 +1,4 @@
--- https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScriot6%20(BIG)
+-- loadstring(game:HttpGet(" https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScriot6%20(BIG)"))()
 
 local function CreateUI(Pos, Size, BackgroundColor, BorderColor, BorderSize, text, name, object, Par, Type)
 	
