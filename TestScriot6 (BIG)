@@ -1,7 +1,5 @@
--- loadstring(game:HttpGet(" https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScriot6%20(BIG)"))()
-
 local function CreateUI(Pos, Size, BackgroundColor, BorderColor, BorderSize, text, name, object, Par, Type)
-
+	
 	local UI = Instance.new(Type)
 	UI.Position = Pos
 	UI.Size = Size
@@ -36,8 +34,11 @@ end
 local plr = game.Players.LocalPlayer
 local PlrGui = plr.PlayerGui
 
+
 local gui = Instance.new("ScreenGui")
 gui.Parent = PlrGui
+gui.Name = "Game Searcher"
+gui.ResetOnSpawn = false
 
 local MainFrame = CreateUI( UDim2.new(0.75, 0,0.125, 0), UDim2.new(0.15, 0,0.75, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 10, nil, "MainFrame", nil, gui, "Frame")
 
@@ -56,7 +57,7 @@ Scrolling.ScrollBarImageColor3 = Color3.new(0, 0, 0)
 local Buffer = Instance.new("Frame")
 Buffer.Parent = Scrolling
 Buffer.Size = UDim2.fromScale(0, 0)
-Buffer.Name = "0000000000000000000000000000"
+Buffer.Name = "0000000000000000000000"      -- AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 Buffer.BackgroundTransparency = 1
 
 local UIList = Instance.new("UIListLayout")
@@ -83,7 +84,41 @@ local ParentText = CreateUI(UDim2.new(0.268, 0,0.75, 0), UDim2.new(0.243, 2,0.25
 
 local parent = CreateUI(UDim2.new(0.515, 5,0.75, 0), UDim2.new(0.444, 5,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "Nil", "Parent", nil, Info, "TextLabel")
 
+local Command1 = Instance.new("TextChatCommand")
+Command1.Parent = game.TextChatService
+Command1.PrimaryAlias = "/bring"
+Command1.SecondaryAlias = "/goto"
 
+local Command2 = Instance.new("TextChatCommand")
+Command2.Parent = game.TextChatService
+Command2.PrimaryAlias = "/getcframe"
+Command2.SecondaryAlias = "/destroy"
+
+
+Command1.Triggered:Connect(function(textSource, message)
+	
+	local messageWords = string.split(message, " ")
+	if messageWords[1] == "/bring" then
+		CurrentObject.Value.CFrame = plr.Character.PrimaryPart.CFrame
+		
+	elseif messageWords[1] == "/goto" then
+		plr.Character.PrimaryPart.CFrame = CurrentObject.Value.CFrame
+		
+	end
+end)
+
+Command2.Triggered:Connect(function(textSource, message)
+
+	local messageWords = string.split(message, " ")
+	if messageWords[1] == "/getcframe" then
+		print(CurrentObject.CFrame)
+
+	elseif messageWords[1] == "/destroy" then
+		CurrentObject.Value:Destroy()
+
+	end
+end)
+	
 
 local function Refresh(Object, Type, value, parent, ObjectText, ScrollUI)
 
