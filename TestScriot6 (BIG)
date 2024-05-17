@@ -1,5 +1,4 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScriot6%20(BIG)"))()
-
 local function CreateUI(Pos, Size, BackgroundColor, BorderColor, BorderSize, text, name, object, Par, Type)
 	
 	local UI = Instance.new(Type)
@@ -96,32 +95,6 @@ Command2.Parent = game.TextChatService
 Command2.PrimaryAlias = "/getcframe"
 Command2.SecondaryAlias = "/destroy"
 
-
-Command1.Triggered:Connect(function(textSource, message)
-	
-	local messageWords = string.split(message, " ")
-	if messageWords[1] == "/bring" then
-		CurrentObject.Value.CFrame = plr.Character.PrimaryPart.CFrame
-		
-	elseif messageWords[1] == "/goto" then
-		plr.Character.PrimaryPart.CFrame = CurrentObject.Value.CFrame
-		
-	end
-end)
-
-Command2.Triggered:Connect(function(textSource, message)
-
-	local messageWords = string.split(message, " ")
-	if messageWords[1] == "/getcframe" then
-		print(CurrentObject.CFrame)
-
-	elseif messageWords[1] == "/destroy" then
-		CurrentObject.Value:Destroy()
-
-	end
-end)
-	
-
 local function Refresh(Object, Type, value, parent, ObjectText, ScrollUI)
 
 
@@ -193,6 +166,35 @@ local function Refresh(Object, Type, value, parent, ObjectText, ScrollUI)
 	end
 
 end
+
+Command1.Triggered:Connect(function(textSource, message)
+
+	local messageWords = string.split(message, " ")
+	if messageWords[1] == "/bring" then
+		CurrentObject.Value.CFrame = plr.Character.PrimaryPart.CFrame
+
+	elseif messageWords[1] == "/goto" then
+		plr.Character.PrimaryPart.CFrame = CurrentObject.Value.CFrame
+
+	end
+end)
+
+Command2.Triggered:Connect(function(textSource, message)
+
+	local messageWords = string.split(message, " ")
+	if messageWords[1] == "/getcframe" then
+		print(CurrentObject.Value.CFrame)
+
+	elseif messageWords[1] == "/destroy" then
+		if CurrentObject.Value.Parent ~= nil then
+			local des = CurrentObject.Value
+			CurrentObject.Value = CurrentObject.Value.Parent
+			des:Destroy()
+			Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+		end
+
+	end
+end)
 
 CurrentObject.Value.Changed:Connect(function()
 	Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
