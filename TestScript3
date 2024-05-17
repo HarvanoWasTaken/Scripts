@@ -1,4 +1,4 @@
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript1"))()
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript3"))()
 
 local Dropped = workspace.DroppedItems
 
