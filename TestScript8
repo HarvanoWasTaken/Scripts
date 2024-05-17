@@ -1,0 +1,17 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript1"))()
+
+local Dropped = workspace.DroppedItems
+
+Dropped.ChildAdded:Connect(function(Part)
+	local gui = Instance.new("BillboardGui")
+	gui.AlwaysOnTop = true
+	gui.Size = UDim2.fromOffset(300, 75)
+	gui.Parent = Part
+
+	local textbox = Instance.new("TextLabel")
+	textbox.Size = UDim2.fromScale(1, 1)
+	textbox.Text = Part.Name
+	textbox.TextScaled = true
+	textbox.Parent = gui
+	textbox.BackgroundTransparency = 0.5
+end)
