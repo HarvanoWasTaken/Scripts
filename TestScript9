@@ -1,0 +1,53 @@
+
+local plr = game.Players.LocalPlayer
+plr.CharacterAdded:Wait()
+local char = plr.Character
+local hum = char:WaitForChild("Humanoid")
+local dropped = workspace.DroppedItems
+local DroppedList = {}
+
+local GoodItems = {
+	["Null?"] = 11,
+	["Curruptaine"] = 10,
+	["Piece of Star"] = 9,
+	["Eternal Flame"] = 8,
+	["Stella's Star"] = 7,
+	["Rainy Bottle"] = 6,
+	["Gilded Coin"] = 5,
+	["Icicle"] = 4,
+	["Wind Essence"] = 3,
+	["Speed Potion"] = 2,
+	["Coin"] = 1,
+	["Lucky Potion"] = 1
+}
+
+local function getHighestValueItem()
+	local highestValue = -math.huge
+	local targetItem = nil
+
+	for _, item in pairs(DroppedList) do
+		local itemName = item.Name
+		local itemValue = GoodItems[itemName]
+		if itemValue and itemValue > highestValue then
+			highestValue = itemValue
+			targetItem = item
+		end
+	end
+
+	return targetItem
+end
+
+dropped.ChildAdded:Connect(function(part)
+	table.insert(DroppedList, part)
+
+	hum:MoveTo(getHighestValueItem().Position)
+
+	hum.MoveToFinished:Connect(function()
+		for i, droppedItem in ipairs(DroppedList) do
+			if droppedItem == part then
+				table.remove(DroppedList, i)
+				break
+			end
+		end
+	end)
+end)
