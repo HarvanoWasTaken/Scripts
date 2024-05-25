@@ -1,1 +1,8 @@
-workspace.IDCIFGBOTA.HumanoidRootPart.CFrame = workspace.DroppedItems:GetChildren()[1].CFrame
+for i = 1, #workspace.DroppedItems:GetChildren(), 1 do
+local Item = workspace.DroppedItems:GetChildren()[i]
+
+repeat
+workspace.IDCIFGBOTA.HumanoidRootPart.CFrame = Item.CFrame
+
+until Item == nil
+end
