@@ -179,10 +179,10 @@ Command1.Triggered:Connect(function(textSource, message)
 
 	local messageWords = string.split(message, " ")
 	if messageWords[1] == "/bring" then
-		CurrentObject.Value.CFrame = plr.Character.PrimaryPart.CFrame
+		CurrentObject.Value.CFrame = plr.Character.HumanoidRootPart.CFrame
 
 	elseif messageWords[1] == "/goto" then
-		plr.Character.PrimaryPart.CFrame = CurrentObject.Value.CFrame
+		plr.Character.HumanoidRootPart.CFrame = CurrentObject.Value.CFrame
 
 	end
 end)
