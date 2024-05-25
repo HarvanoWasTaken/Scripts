@@ -1,6 +1,6 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript6%20(BIG)"))()
 local function CreateUI(Pos, Size, BackgroundColor, BorderColor, BorderSize, text, name, object, Par, Type)
-	
+
 	local UI = Instance.new(Type)
 	UI.Position = Pos
 	UI.Size = Size
@@ -9,21 +9,21 @@ local function CreateUI(Pos, Size, BackgroundColor, BorderColor, BorderSize, tex
 	UI.BorderSizePixel = BorderSize
 	UI.Name = name
 	UI.Parent = Par
-	
+
 	if text ~= nil then
 		UI.Text = text
 		UI.TextScaled = true
 		UI.Font = Enum.Font.FredokaOne
 	end
-	
+
 	if object ~= nil then
-		
+
 		local object = Instance.new("ObjectValue")
 		object.Parent = UI
 		object.Value = object
 		object.Name = "object"
 	end
-	
+
 	return UI
 end
 
@@ -79,7 +79,9 @@ local Type = CreateUI(UDim2.new(0.25, 5,0.44, 0), UDim2.new(0.246, 0,0.25, 0), C
 
 local ValueText = CreateUI(UDim2.new(0.537, 0,0.44, 0), UDim2.new(0.25, 0,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "Value:", "ValueText", nil, Info, "TextLabel")
 
-local value = CreateUI(UDim2.new(0.769, 5,0.44, 0), UDim2.new(0.21, 0,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "Nil", "Value", nil, Info, "TextLabel")
+local value = CreateUI(UDim2.new(0.769, 5,0.44, 0), UDim2.new(0.21, 0,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "Nil", "Value", nil, Info, "TextBox")
+value.PlaceholderText = "Nil"
+value.ClearTextOnFocus = false
 
 local ParentText = CreateUI(UDim2.new(0.268, 0,0.75, 0), UDim2.new(0.243, 2,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "Parent:", "ParentText", nil, Info, "TextLabel")
 
@@ -92,8 +94,13 @@ Command1.SecondaryAlias = "/goto"
 
 local Command2 = Instance.new("TextChatCommand")
 Command2.Parent = game.TextChatService
-Command2.PrimaryAlias = "/getcframe"
+Command2.PrimaryAlias = "/clone"
 Command2.SecondaryAlias = "/destroy"
+
+local Command3 = Instance.new("TextChatCommand")
+Command1.Parent = game.TextChatService
+Command1.PrimaryAlias = "/getcframe"
+Command1.SecondaryAlias = "/getmycframe"
 
 local function Refresh(Object, Type, value, parent, ObjectText, ScrollUI)
 
@@ -101,20 +108,21 @@ local function Refresh(Object, Type, value, parent, ObjectText, ScrollUI)
 	local TotalObjects = Object:GetChildren()
 	ObjectText.Text = Object.Name
 	Type.Text = Object.ClassName
-	
+
 	if Object.ClassName == "NumberValue" or Object.ClassName == "IntValue" or Object.ClassName == "StringValue" or Object.ClassName == "ObjectValue" then	
 		if Object.ClassName == "ObjectValue" then
-			
-		value.Text = Object.Value.Name
+
+			value.Text = Object.Value.Name
 		else
-			
+
 			value.Text = Object.Value
 		end
-	else
 		
+	else
+
 		value.Text = "Nil"
 	end
-	
+
 	if Object.Parent ~= nil then
 
 		parent.Text = Object.Parent.Name
@@ -157,7 +165,7 @@ local function Refresh(Object, Type, value, parent, ObjectText, ScrollUI)
 		ObjectVal.Value = TotalObjects[i]
 
 		Button.MouseButton1Click:Connect(function()
-			
+
 			CurrentObject.Value = ObjectVal.Value
 			Refresh(ObjectVal.Value, Type, value, parent, ObjectText, ScrollUI)
 
@@ -182,8 +190,9 @@ end)
 Command2.Triggered:Connect(function(textSource, message)
 
 	local messageWords = string.split(message, " ")
-	if messageWords[1] == "/getcframe" then
-		print(CurrentObject.Value.CFrame)
+	if messageWords[1] == "/clone" then
+		local cloned = CurrentObject.Value:Clone()
+		cloned.Parent = CurrentObject.Value.Parent
 
 	elseif messageWords[1] == "/destroy" then
 		if CurrentObject.Value.Parent ~= nil then
@@ -195,6 +204,21 @@ Command2.Triggered:Connect(function(textSource, message)
 
 	end
 end)
+
+Command3.Triggered:Connect(function(textSource, message)
+
+	local messageWords = string.split(message, " ")
+	if messageWords[1] == "/getcframe" then
+		print(CurrentObject.Value.CFrame)
+
+	elseif messageWords[1] == "/getmycframe" then
+		if CurrentObject.Value.Parent ~= nil then
+        print(plr.Character.PrimaryPart.CFrame)
+		end
+
+	end
+end)
+
 
 CurrentObject.Value.Changed:Connect(function()
 	Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
@@ -213,6 +237,57 @@ GoBack.MouseButton1Click:Connect(function()
 
 		CurrentObject.Value = CurrentObject.Value.Parent
 		Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+	end
+end)
+
+local ValueClass = CurrentObject.Value
+
+value.Focused:Connect(function()
+	if CurrentObject.Value.ClassName == "NumberValue" or CurrentObject.Value.ClassName == "IntValue" or CurrentObject.Value.ClassName == "StringValue" then	
+		value.Text = ""
+
+	else
+		value:ReleaseFocus()
+
+	end
+end)
+
+value:GetPropertyChangedSignal("Text"):Connect(function()
+	
+	if CurrentObject.Value.ClassName == "NumberValue" then
+		value.Text = value.Text:gsub('[^%d%.%-]', '');
+
+	elseif CurrentObject.Value.ClassName == "IntValue" then
+		value.Text = value.Text:gsub('[^%d%-]', '');
+
+
+	elseif CurrentObject.Value.ClassName == "StringValue" then
+		value.Text = value.Text
+
+	end
+end)
+
+value.FocusLost:Connect(function()
+	if CurrentObject.Value.ClassName == "NumberValue" then
+		if tonumber(value.Text) then
+			
+			CurrentObject.Value.Value = tonumber(value.Text)
+			Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+			
+		end
+		
+	elseif CurrentObject.Value.ClassName == "IntValue" then
+		if tonumber(value.Text) then
+			
+			CurrentObject.Value.Value = value.Text
+			Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+			
+		end
+		
+	elseif CurrentObject.Value.ClassName == "StringValue" then
+		CurrentObject.Value.Value = value.Text
+		Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+		
 	end
 end)
 
