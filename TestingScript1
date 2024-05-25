@@ -1,8 +1,12 @@
 for i = 1, #workspace.DroppedItems:GetChildren(), 1 do
+
 local Item = workspace.DroppedItems:GetChildren()[i]
+
+if Item.Name == "Coin" then
 
 repeat
 workspace.IDCIFGBOTA.HumanoidRootPart.CFrame = Item.CFrame
 
 until Item == nil
+end
 end
