@@ -1,0 +1,247 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript6%20(BIG)"))()
+local function CreateUI(Pos, Size, BackgroundColor, BorderColor, BorderSize, text, name, object, Par, Type)
+
+	local UI = Instance.new(Type)
+	UI.Position = Pos
+	UI.Size = Size
+	UI.BackgroundColor3 = BackgroundColor
+	UI.BorderColor3 = BorderColor
+	UI.BorderSizePixel = BorderSize
+	UI.Name = name
+	UI.Parent = Par
+
+	if text ~= nil then
+		UI.Text = text
+		UI.TextScaled = true
+		UI.Font = Enum.Font.FredokaOne
+	end
+
+	if object ~= nil then
+
+		local object = Instance.new("ObjectValue")
+		object.Parent = UI
+		object.Value = object
+		object.Name = "object"
+	end
+
+	return UI
+end
+
+
+
+
+
+
+local plr = game.Players.LocalPlayer
+local PlrGui = plr.PlayerGui
+
+
+local gui = Instance.new("ScreenGui")
+gui.Parent = PlrGui
+gui.Name = "Game Searcher"
+gui.ResetOnSpawn = false
+
+local MainFrame = CreateUI( UDim2.new(0.75, 0,0.125, 0), UDim2.new(0.15, 0,0.75, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 10, nil, "MainFrame", nil, gui, "Frame")
+
+local CurrentObject = Instance.new("ObjectValue")
+CurrentObject.Parent = MainFrame
+CurrentObject.Value = workspace.Parent
+CurrentObject.Name = "CurrentObject"
+
+local Info = CreateUI(UDim2.new(0, 0,0, 0), UDim2.new(1, 0,0.135, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, nil, "Info", nil, MainFrame, "Frame")
+
+local Scrolling = CreateUI(UDim2.new(0, 0,0.135, 5), UDim2.new(1, 0,0.858, 0), Color3.new(0.58823529411, 0.58823529411, 0.58823529411), Color3.new(0, 0, 0), 0, nil, "ScrollingFrame", nil, MainFrame, "ScrollingFrame")
+Scrolling.AutomaticCanvasSize = Enum.AutomaticSize.XY
+Scrolling.CanvasSize = UDim2.fromScale(0, 0.8580001)
+Scrolling.ScrollBarImageColor3 = Color3.new(0, 0, 0)
+
+local Buffer = Instance.new("Frame")
+Buffer.Parent = Scrolling
+Buffer.Size = UDim2.fromScale(0, 0)
+Buffer.Name = "0000000000000000000000"      -- AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Buffer.BackgroundTransparency = 1
+
+local UIList = Instance.new("UIListLayout")
+UIList.Parent = Scrolling
+UIList.Padding = UDim.new(0, 25)
+UIList.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIList.SortOrder = Enum.SortOrder.Name
+
+
+local GoBack = CreateUI(UDim2.new(0, 0,0.75, 0), UDim2.new(0.243, 2,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "GoBack", "GoBack", nil, Info, "TextButton")
+GoBack.FontFace.Weight = Enum.FontWeight.Bold
+
+local ObjectText = CreateUI(UDim2.new(0, 0,0, 0), UDim2.new(1, 0,0.391, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "Game", "ObjectText", nil, Info, "TextLabel")
+
+local TypeText = CreateUI(UDim2.new(0, 0,0.39, 5), UDim2.new(0.243, 2,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "Type:", "TypeText", nil, Info, "TextLabel")
+
+local Type = CreateUI(UDim2.new(0.25, 5,0.44, 0), UDim2.new(0.246, 0,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "DataModel", "Type", nil, Info, "TextLabel")
+
+local ValueText = CreateUI(UDim2.new(0.537, 0,0.44, 0), UDim2.new(0.25, 0,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "Value:", "ValueText", nil, Info, "TextLabel")
+
+local value = CreateUI(UDim2.new(0.769, 5,0.44, 0), UDim2.new(0.21, 0,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "Nil", "Value", nil, Info, "TextLabel")
+
+local ParentText = CreateUI(UDim2.new(0.268, 0,0.75, 0), UDim2.new(0.243, 2,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "Parent:", "ParentText", nil, Info, "TextLabel")
+
+local parent = CreateUI(UDim2.new(0.515, 5,0.75, 0), UDim2.new(0.444, 5,0.25, 0), Color3.new(1, 1, 1), Color3.new(0, 0, 0), 5, "Nil", "Parent", nil, Info, "TextLabel")
+
+local Command1 = Instance.new("TextChatCommand")
+Command1.Parent = game.TextChatService
+Command1.PrimaryAlias = "/bring"
+Command1.SecondaryAlias = "/goto"
+
+local Command2 = Instance.new("TextChatCommand")
+Command2.Parent = game.TextChatService
+Command2.PrimaryAlias = "/getcframe"
+Command2.SecondaryAlias = "/destroy"
+
+local function Refresh(Object, Type, value, parent, ObjectText, ScrollUI)
+
+
+	local TotalObjects = Object:GetChildren()
+	ObjectText.Text = Object.Name
+	Type.Text = Object.ClassName
+
+	if Object.ClassName == "NumberValue" or Object.ClassName == "IntValue" or Object.ClassName == "StringValue" or Object.ClassName == "ObjectValue" then	
+		if Object.ClassName == "ObjectValue" then
+
+			value.Text = Object.Value.Name
+		else
+
+			value.Text = Object.Value
+		end
+	else
+
+		value.Text = "Nil"
+	end
+
+	if Object.Parent ~= nil then
+
+		parent.Text = Object.Parent.Name
+
+	end
+
+	for i = 1, #ScrollUI:GetChildren(), 1 do
+		local GoodSpaces = 3
+		-- print("Amount Before Changed: " .. #ScrollUI:GetChildren() .. " Value Into Loop: " .. i)	
+		if ScrollUI:GetChildren()[GoodSpaces] ~= nil then
+
+			--	if ScrollUI:GetChildren()[GoodSpaces].ClassName ~= "UIListLayout" and ScrollUI:GetChildren()[i].Name ~= "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" then
+
+			ScrollUI:GetChildren()[GoodSpaces]:Destroy()
+
+			--	end
+		end
+	end
+
+	for i = 1, #TotalObjects, 1 do
+		local Current = TotalObjects[i]
+
+		local Button = Instance.new("TextButton")
+		Button.Parent = ScrollUI
+		Button.Text = TotalObjects[i].Name
+		Button.Name = TotalObjects[i].Name .. " Button"
+		Button.Size = UDim2.fromOffset(200, 50)
+		Button.BorderColor3 = Color3.new(0, 0, 0)
+		Button.BorderSizePixel = 0
+		Button.BackgroundColor3 = Color3.new(1, 1, 1)
+		Button.FontFace.Weight = Enum.FontWeight.Bold
+
+
+		local Corner = Instance.new("UICorner")
+		Corner.Parent = Button
+		Corner.CornerRadius = UDim.new(0, 10)
+
+		local ObjectVal = Instance.new("ObjectValue")
+		ObjectVal.Parent = Button
+		ObjectVal.Value = TotalObjects[i]
+
+		Button.MouseButton1Click:Connect(function()
+
+			CurrentObject.Value = ObjectVal.Value
+			Refresh(ObjectVal.Value, Type, value, parent, ObjectText, ScrollUI)
+
+
+		end)
+	end
+
+end
+
+Command1.Triggered:Connect(function(textSource, message)
+
+	local messageWords = string.split(message, " ")
+	if messageWords[1] == "/bring" then
+		CurrentObject.Value.CFrame = plr.Character.PrimaryPart.CFrame
+
+	elseif messageWords[1] == "/goto" then
+		plr.Character.PrimaryPart.CFrame = CurrentObject.Value.CFrame
+
+	end
+end)
+
+Command2.Triggered:Connect(function(textSource, message)
+
+	local messageWords = string.split(message, " ")
+	if messageWords[1] == "/getcframe" then
+		print(CurrentObject.Value.CFrame)
+
+	elseif messageWords[1] == "/destroy" then
+		if CurrentObject.Value.Parent ~= nil then
+			local des = CurrentObject.Value
+			CurrentObject.Value = CurrentObject.Value.Parent
+			des:Destroy()
+			Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+		end
+
+	end
+end)
+
+CurrentObject.Value.Changed:Connect(function()
+	Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+end)
+
+CurrentObject.Value.ChildAdded:Connect(function()
+	Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+end)
+
+CurrentObject.Value.ChildRemoved:Connect(function()
+	Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+end)
+
+GoBack.MouseButton1Click:Connect(function()
+	if CurrentObject.Value.Parent ~= nil then
+
+		CurrentObject.Value = CurrentObject.Value.Parent
+		Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+	end
+end)
+
+Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+
+
+
+
+
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScript1"))()
+
+local plr = game.Players.LocalPlayer
+local plrGui = plr:WaitForChild("PlayerGui")
+local char = plr.Character
+
+local gui = Instance.new("ScreenGui")
+gui.Parent = plrGui
+
+local textbox = Instance.new("TextLabel")
+textbox.Parent = gui
+
+textbox.BackgroundColor3 = Color3.new(1, 1, 1)
+textbox.TextColor3 = Color3.new(0, 0, 0)
+textbox.TextScaled = true
+
+textbox.Size = UDim2.fromOffset(200, 100)
+textbox.Position = UDim2.fromScale(0.45, 0)
+
+
+while wait(1) do
+	textbox.Text = math.round(char.PrimaryPart.Position.X * 100) / 100 .. "," .. math.round(char.PrimaryPart.Position.Y * 100) / 100 .. "," .. math.round(char.PrimaryPart.Position.Z * 100) / 100
+end
