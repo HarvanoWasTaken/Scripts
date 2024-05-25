@@ -1,0 +1,1 @@
+workspace.IDCIFGBOTA.HumanoidRootPart.CFrame = workspace.DroppedItems:GetChildren()[1].CFrame
