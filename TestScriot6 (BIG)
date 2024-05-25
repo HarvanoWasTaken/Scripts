@@ -1,4 +1,3 @@
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/HarvanoWasTaken/Scripts/main/TestScriot6%20(BIG)"))()
 local function CreateUI(Pos, Size, BackgroundColor, BorderColor, BorderSize, text, name, object, Par, Type)
 
 	local UI = Instance.new(Type)
@@ -98,9 +97,9 @@ Command2.PrimaryAlias = "/clone"
 Command2.SecondaryAlias = "/destroy"
 
 local Command3 = Instance.new("TextChatCommand")
-Command1.Parent = game.TextChatService
-Command1.PrimaryAlias = "/getcframe"
-Command1.SecondaryAlias = "/getmycframe"
+Command3.Parent = game.TextChatService
+Command3.PrimaryAlias = "/getcframe"
+Command3.SecondaryAlias = "/getmycframe"
 
 local function Refresh(Object, Type, value, parent, ObjectText, ScrollUI)
 
@@ -191,15 +190,21 @@ Command2.Triggered:Connect(function(textSource, message)
 
 	local messageWords = string.split(message, " ")
 	if messageWords[1] == "/clone" then
-		local cloned = CurrentObject.Value:Clone()
-		cloned.Parent = CurrentObject.Value.Parent
+		if CurrentObject.Value.Parent ~= nil then
+			
+			local cloned = CurrentObject.Value:Clone()
+			cloned.Parent = CurrentObject.Value.Parent
+			
+		end
 
 	elseif messageWords[1] == "/destroy" then
 		if CurrentObject.Value.Parent ~= nil then
 			local des = CurrentObject.Value
+			
 			CurrentObject.Value = CurrentObject.Value.Parent
 			des:Destroy()
 			Refresh(CurrentObject.Value, Type, value, parent, ObjectText, Scrolling)
+			
 		end
 
 	end
@@ -212,9 +217,7 @@ Command3.Triggered:Connect(function(textSource, message)
 		print(CurrentObject.Value.CFrame)
 
 	elseif messageWords[1] == "/getmycframe" then
-		if CurrentObject.Value.Parent ~= nil then
         print(plr.Character.PrimaryPart.CFrame)
-		end
 
 	end
 end)
