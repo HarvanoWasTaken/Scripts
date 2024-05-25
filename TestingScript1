@@ -6,7 +6,7 @@ if Item.Name == "Coin" then
 
 repeat
 workspace.IDCIFGBOTA.HumanoidRootPart.CFrame = Item.CFrame
-
+wait(0)
 until Item == nil
 end
 end
