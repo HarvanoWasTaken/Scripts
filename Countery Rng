@@ -4,5 +4,5 @@ game.ReplicatedStorage.RemoteEvents.DiceCraft:FireServer(1)
 
 
 
-game.Players.nintenblock12.MobileGui.Admin.AdminPanelButton.Interactible = true
-game.Players.nintenblock12.MobileGui.Admin.AdminPanelButton.Visible = true
+game.Players.nintenblock12.PlayerGui.MobileGui.Admin.AdminPanelButton.Interactible = true
+game.Players.nintenblock12.PlayerGui.MobileGui.Admin.AdminPanelButton.Visible = true
