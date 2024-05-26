@@ -1,0 +1,7 @@
+game.ReplicatedStorage.RemoteEvents.Roll:FireServer()
+game.ReplicatedStorage.RemoteEvents.Upgrade:FireServer(1)
+game.ReplicatedStorage.RemoteEvents.DiceCraft:FireServer(1)
+
+
+
+game.Players.nintenblock12.MobileGui.Admin.AdminPanelButton
