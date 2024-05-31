@@ -16,3 +16,5 @@ local message = MainGui.Templates.GlobalAnnouncement:Clone()
 message.Parent = containerFrame
 message.Desc.Text = "hi"
 message.Visible = true
+wait(5)
+message:Destroy()
