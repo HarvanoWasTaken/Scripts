@@ -12,7 +12,8 @@ require(game.ReplicatedStorage.HDAdminClient.Modules.Messages):GlobalAnnouncemen
 
 local MainGui = game.Players.nintenblock12.PlayerGui.HDAdminGUIs
 local message = MainGui.templates.GlobalAnnouncement:Clone()
-message.Visible = true
-message.Desc.TextColor3 = Color3.new(data.Color[1], data.Color[2], data.Color[3])
-message.Desc.Text = data.Message
 message.Parent = containerFrame
+message.Desc.TextColor3 = Color3.new(data.Color[1], data.Color[2], data.Color[3])
+message.Desc.Text = "hi"
+message.Parent = containerFrame
+message.Visible = true
