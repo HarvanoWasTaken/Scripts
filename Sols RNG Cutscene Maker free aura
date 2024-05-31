@@ -1,1 +1,3 @@
-game.ReplicatedStorage.Remotes.AuraEquip:FireServer(game.ReplicatedStorage.Aruas.Hades)  -- change hades to whaterver else is in there
+game.ReplicatedStorage.Remotes.AuraEquip:FireServer(game.ReplicatedStorage.Auras.Hades) 
+
+-- change hades to whaterver else is in there --
