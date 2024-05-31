@@ -4,3 +4,6 @@ game.ReplicatedStorage.Remotes.AuraEquip:FireServer(game.ReplicatedStorage.Auras
 
 
 game.ReplicatedStorage.CreateAnnouncement:FireServer("uhh")
+
+
+require(game.ReplicatedStorage.HDAdminClient.Modules.Messages):GlobalAnnouncement("hi")
