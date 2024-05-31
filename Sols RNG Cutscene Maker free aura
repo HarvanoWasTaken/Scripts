@@ -7,3 +7,11 @@ game.ReplicatedStorage.CreateAnnouncement:FireServer("uhh")
 
 
 require(game.ReplicatedStorage.HDAdminClient.Modules.Messages):GlobalAnnouncement("hi")
+
+
+
+local MainGui = game.Players.nintenblock12.PlayerGui.HDAdminGUIs
+	local message = MainGui.templates.GlobalAnnouncement:Clone()
+	message.Desc.TextColor3 = Color3.new(data.Color[1], data.Color[2], data.Color[3])
+	message.Desc.Text = data.Message
+	message.Parent = containerFrame
