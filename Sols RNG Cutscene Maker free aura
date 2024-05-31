@@ -1,3 +1,6 @@
 game.ReplicatedStorage.Remotes.AuraEquip:FireServer(game.ReplicatedStorage.Auras.gfccorse) 
 
 -- change gfccorse to whaterver else is in there --
+
+
+game.ReplicatedStorage.CreateAnnouncement:FireServer()
