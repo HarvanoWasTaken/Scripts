@@ -21,7 +21,18 @@ message:Destroy()
 
 
 
-local plr = game.Players.LocalPlayer
-plr.Chatted:Connect(function(mes)
-require(game.ReplicatedStorage.HDAdminClient.Modules.Messages):GlobalAnnouncement(mes)
+local Command1 = Instance.new("TextChatCommand")
+Command1.Parent = game.TextChatService
+Command1.PrimaryAlias = "uhh"
+
+
+Command1.Triggered:Connect(function(textSource, message)
+	local messageWords = string.split(message, " ")
+	if messageWords[1] == "uhh" then
+		print(messageWords[1])
+		require(game.ReplicatedStorage.HDAdminClient.Modules.Messages):GlobalAnnouncement(messageWords[1])
+		end
 end)
+
+
+main:GetModule("cf"):ActivateClientCommand(commandName)
