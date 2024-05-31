@@ -22,6 +22,6 @@ message:Destroy()
 
 
 local plr = game.Players.LocalPlayer
-plr.Chatted:Connnect(function(mes)
+plr.Chatted:Connect(function(mes)
 require(game.ReplicatedStorage.HDAdminClient.Modules.Messages):GlobalAnnouncement(mes)
 end)
