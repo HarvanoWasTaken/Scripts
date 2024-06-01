@@ -23,10 +23,12 @@ end)
 ----------------------------------------------------
 
 local plr = game.Players.LocalPlayer
+local char = plr.Character
+local HumRootPart = char.HumanoidRootPart
 
 game.workspace.ChildAdded:Connect(function(fruit)
 if fruit.ClassName == "Tool" then
 print("yes")
-fruit.Parent = plr.Backpack
+fruit.Handle.CFrame = HumRootPart.CFrame
 end
 end)
