@@ -7,10 +7,7 @@ for i = 1, #game.workspace:GetChildren(), 1 do
 local StartFruit = game.workspace:GetChildren()[i]
 if StartFruit.ClassName == "Tool" then
 
-print("Started Collecting " .. StartFruit.Name .. ".")
-wait(0.1)
 StartFruit.Handle.CFrame = HumRootPart.CFrame
-print("Finished Collecting " .. StartFruit.Name .. ".")
 
 end
 end
