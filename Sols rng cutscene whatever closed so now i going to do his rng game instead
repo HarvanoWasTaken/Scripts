@@ -1,5 +1,4 @@
 local replicated = game.Replicated storage
 local remotes = replicated.Remotes
 
-remotes.SendRoll:FireServer()
-remotes.EndRoll:FireServer()
+remotes.EquipArua:FireServer(workspace.Popcat1826.Aruas["3RR0R : null"])
