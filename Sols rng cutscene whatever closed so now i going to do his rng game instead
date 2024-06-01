@@ -5,4 +5,6 @@ local AuraFolder = replicated.AurasFolder
 local AuraModels = AuraFolder.AuraModels
 local RollMan = replicated.RollManager
 
+require(RollMan):Roll(18)
+
 remotes.MorphPlayer:FireServer(AruaModels.Uncommon)
