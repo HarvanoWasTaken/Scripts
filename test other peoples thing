@@ -1,1 +1,51 @@
+Settings = {
+AutoTeam = "Pirates", -- Pirates or Marines
+AutoEat = false, -- true or false
+AutoStore = true, -- true or false
+ContinueHopAfterStoredFruit = false, -- true or false
+WebhookURL = "", --Put your webhook links in here
+WebhookPingEveryone = false, -- true or false
+WantedFruits = {
 
+"Rocket Fruit",
+"Spin Fruit",
+"Chop Fruit",
+"Spring Fruit",
+"Bomb Fruit",
+"Smoke Fruit",
+"Spike Fruit",
+"Flame Fruit",
+"Falcon Fruit",
+"Ice Fruit",
+"Sand Fruit",
+"Dark Fruit",
+"Ghost Fruit",
+"Diamond Fruit",
+"Light Fruit",
+"Love Fruit",
+"Rubber Fruit",
+"Barrier Fruit",
+"Magma Fruit",
+"Portal Fruit",
+"Quake Fruit",
+"Buddha Fruit",
+"Spider Fruit",
+"Sound Fruit",
+"Phoenix Fruit",
+"Rumble Fruit",
+"Pain Fruit",
+"Blizzard Fruit",
+"Gravity Fruit",
+"Mammoth Fruit",
+"Dough Fruit",
+"Shadow Fruit",
+"Venom Fruit",
+"Control Fruit",
+"Spirit Fruit",
+"Dragon Fruit",
+"Leopard Fruit",
+"Kitsune Fruit"
+
+--List of fruits, delete fruits that you don't want
+}
+}
