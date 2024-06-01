@@ -4,12 +4,13 @@ local HumRootPart = char.HumanoidRootPart
 
 
 for i = 1, #game.workspace:GetChildren(), 1 do
-if fruit.ClassName == "Tool" then
+local StartFruit = game.workspace:GetChildren()[i]
+if StartFruit.ClassName == "Tool" then
 
-print("Started Collecting " .. fruit.Name .. ".")
+print("Started Collecting " .. StartFruit.Name .. ".")
 wait(0.1)
-fruit.Handle.CFrame = HumRootPart.CFrame
-print("Finished Collecting " .. fruit.Name .. ".")
+StartFruit.Handle.CFrame = HumRootPart.CFrame
+print("Finished Collecting " .. StartFruit.Name .. ".")
 
 end
 end
