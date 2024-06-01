@@ -306,7 +306,7 @@ local char = plr.Character
 local HumRootPart = char.HumanoidRootPart
 
 
-for i = 1. #game.workspace:GetChildren(), 1 do
+for i = 1, #game.workspace:GetChildren(), 1 do
 if fruit.ClassName == "Tool" then
 
 print("Started Collecting " .. fruit.Name .. ".")
