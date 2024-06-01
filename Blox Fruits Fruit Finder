@@ -2,7 +2,7 @@ local plr = game.Players.LocalPlayer
 local char
 
 local function GetCharacter(TargetPlr)
-TargetPlr:CharacterAdded:Wait()
+TargetPlr.CharacterAdded:Wait()
 wait(0.25)
 return TargetPlr.Character
 end
