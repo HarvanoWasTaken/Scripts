@@ -1,4 +1,7 @@
 local replicated = game.Replicated storage
 local remotes = replicated.Remotes
 
-remotes.EquipArua:FireServer(workspace.Popcat1826.Aruas:GetChildren[i])
+local AuraFolder = replicated.AurasFolder
+local AuraModels = AuraFolder.AuraModels
+
+remotes.EquipArua:FireServer(AruaModels["Uncommon"])
