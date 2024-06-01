@@ -12,7 +12,7 @@ fruit.Handle.CFrame = HumRootPart.CFrame
 print("Finished Collecting " .. fruit.Name .. ".")
 
 end
-end)
+end
 
 
 game.workspace.ChildAdded:Connect(function(fruit)
