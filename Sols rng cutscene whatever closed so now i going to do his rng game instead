@@ -3,5 +3,6 @@ local remotes = replicated.Remotes
 
 local AuraFolder = replicated.AurasFolder
 local AuraModels = AuraFolder.AuraModels
+local RollMan = replicated.RollManager
 
-remotes.EquipAura:FireServer(AruaModels["Uncommon"])
+remotes.MorphPlayer:FireServer(AruaModels.Uncommon)
