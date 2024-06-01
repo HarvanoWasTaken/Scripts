@@ -15,6 +15,7 @@ end)
 
 game.workspace.ChildAdded:Connect(function(fruit)
 if fruit.ClassName == "Tool" then
+print("yes")
 fruit.Handle.CFrame = char.HumanoidRootPart.CFrame
 end
 end)
