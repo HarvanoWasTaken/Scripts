@@ -37,6 +37,7 @@ WantedFruits = {
 "Blizzard Fruit",
 "Gravity Fruit",
 "Mammoth Fruit",
+"T-Rex Fruit",
 "Dough Fruit",
 "Shadow Fruit",
 "Venom Fruit",
@@ -49,3 +50,5 @@ WantedFruits = {
 --List of fruits, delete fruits that you don't want
 }
 }
+-- i am trying to find rest cus this load string bit wont work
+-- loadstring(game:HttpGet('https://raw.githubusercontent.com/GodClass/EpicScripts/main/Blox%20Fruit%20DF%20Script.txt'))()
