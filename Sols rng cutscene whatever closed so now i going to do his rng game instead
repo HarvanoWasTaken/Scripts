@@ -1,7 +1,7 @@
-local replicated = game.Replicated storage
+local replicated = game.ReplicatedStorage
 local remotes = replicated.Remotes
 
 local AuraFolder = replicated.AurasFolder
 local AuraModels = AuraFolder.AuraModels
 
-remotes.EquipArua:FireServer(AruaModels["Uncommon"])
+remotes.EquipAura:FireServer(AruaModels["Uncommon"])
