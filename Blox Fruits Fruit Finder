@@ -28,7 +28,9 @@ local HumRootPart = char.HumanoidRootPart
 
 game.workspace.ChildAdded:Connect(function(fruit)
 if fruit.ClassName == "Tool" then
-print("yes")
+print("Started Collecting " .. fruit.Name .. ".")
+wait(0.1)
 fruit.Handle.CFrame = HumRootPart.CFrame
+print("Finished Collecting " .. fruit.Name .. ".")
 end
 end)
