@@ -1,0 +1,20 @@
+local plr = game.Players.LocalPlayer
+local char
+
+local function GetCharacter(TargetPlr)
+TargetPlr:CharacterAdded:Wait()
+wait(0.25)
+return TargetPlr.Character
+end
+
+char = GetCharacter(plr)
+
+char.Humanoid.Died:Connect(function()
+char = GetCharacter(plr)
+end)
+
+game.workspace.ChildAdded:Connect(function(fruit)
+if fruit.ClassName == "Tool" then
+fruit.Handle.CFrame = char.HumanoidRootPart.CFrame
+end
+end)
