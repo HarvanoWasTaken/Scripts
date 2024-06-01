@@ -19,3 +19,14 @@ print("yes")
 fruit.Handle.CFrame = char.HumanoidRootPart.CFrame
 end
 end)
+
+----------------------------------------------------
+
+local plr = game.Players.LocalPlayer
+
+game.workspace.ChildAdded:Connect(function(fruit)
+if fruit.ClassName == "Tool" then
+print("yes")
+fruit.Parent = plr.Backpack
+end
+end)
