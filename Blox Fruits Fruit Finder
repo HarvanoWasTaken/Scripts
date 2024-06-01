@@ -26,6 +26,19 @@ local plr = game.Players.LocalPlayer
 local char = plr.Character
 local HumRootPart = char.HumanoidRootPart
 
+
+for i = 1. #game.workspace:GetChildren(), 1 do
+if fruit.ClassName == "Tool" then
+
+print("Started Collecting " .. fruit.Name .. ".")
+wait(0.1)
+fruit.Handle.CFrame = HumRootPart.CFrame
+print("Finished Collecting " .. fruit.Name .. ".")
+
+end
+end)
+
+
 game.workspace.ChildAdded:Connect(function(fruit)
 if fruit.ClassName == "Tool" then
 print("Started Collecting " .. fruit.Name .. ".")
