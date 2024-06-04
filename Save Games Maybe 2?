@@ -33,6 +33,7 @@ function doesExist(parent, str)
 end
 
 function decompileOb(ob)
+wait(1)
 	for i,v in next, ob:GetChildren() do
 		if v:IsA('LocalScript') or v:IsA('ModuleScript') then
 			local success, err = pcall(function()
