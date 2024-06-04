@@ -147,7 +147,7 @@ for i,v in next, services do
 	end
 end
 
-decompileOb(main)
+decompileOb(workspace)
 
 
 local terrainDoc = [[
