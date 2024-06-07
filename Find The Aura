@@ -1,1 +1,8 @@
+for i = 1, #workspace.Morphs:GetChildren(), 1 do 
 
+if workspace.Morphs:GetChildren()[i].ClassName ~= "Script" then
+
+workspace.Morphs:GetChildren()[i].CFrame = workspace.nintenblock12.HumanoidRootPart.CFrame  
+
+end 
+end
