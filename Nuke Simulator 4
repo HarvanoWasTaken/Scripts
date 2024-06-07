@@ -1,0 +1,8 @@
+for i = 1, #workspace:GetChildren(), 1 do 
+
+if workspace:GetChildren()[i].Name == "DoomsdayWeapon" then
+
+workspace:GetChildren()[i].Handle.CFrame = workspace.nintenblock12.HumanoidRootPart.CFrame  
+
+end 
+end
