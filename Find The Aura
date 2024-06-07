@@ -5,11 +5,11 @@ local AuraName = workspace.Morphs:GetChildren()[i].Name
 
 while wait(0.1) do
 
-if workspace.Morphs:GetChildren()[i].Name == AuraName then
+if workspace.Morphs:GetChildren()[i].Name ~= AuraName then
 break
 end
 
-workspace.Morphs:GetChildren()[i].CFrame = workspace.nintenblock12.HumanoidRootPart.CFrame  
+workspace.nintenblock12.HumanoidRootPart.CFrame = workspace.Morphs:GetChildren()[i].CFrame
 
 end
 
