@@ -3,11 +3,8 @@ for i = 1, #workspace.Morphs:GetChildren(), 1 do
 if workspace.Morphs:GetChildren()[i].ClassName ~= "Script" then
 local AuraName = workspace.Morphs:GetChildren()[i].Name
 
-while wait(0.1) do
-
-if workspace.Morphs:GetChildren()[i].Name ~= AuraName then
-break
-end
+for i = 1, 60, 1 do
+wait(0)
 
 workspace.nintenblock12.HumanoidRootPart.CFrame = workspace.Morphs:GetChildren()[i].CFrame
 
