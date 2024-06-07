@@ -1,3 +1,14 @@
+for i = 1, #workspace.nintenblock12:GetChildren(), 1 do 
+
+if workspace.nintenblock12.HumanoidRootPart:GetChildren()[i].ClassName ~= "Part" then
+
+workspace.nintenblock12[i].CanCollide = false
+
+end 
+end
+
+workspace.nintenblock12.HumanoidRootPart.CanCollide = false
+
 for i = 1, #workspace.Morphs:GetChildren(), 1 do 
 
 if workspace.Morphs:GetChildren()[i].ClassName ~= "Script" then
