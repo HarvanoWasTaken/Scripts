@@ -3,7 +3,7 @@ for i = 1, #workspace.Morphs:GetChildren(), 1 do
 if workspace.Morphs:GetChildren()[i].ClassName ~= "Script" then
 local AuraName = workspace.Morphs:GetChildren()[i].Name
 
-While Wait(0.1) do
+While Wait(0) do
 
 if workspace.Morphs:GetChildren()[i].Name == AuraName then
 Break
