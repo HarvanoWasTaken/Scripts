@@ -1,8 +1,14 @@
 for i = 1, #workspace.Morphs:GetChildren(), 1 do 
 
 if workspace.Morphs:GetChildren()[i].ClassName ~= "Script" then
+local AuraName = workspace.Morphs:GetChildren()[i].Name
+
+While workspace.Morphs:GetChildren()[i].Name == AuraName do
+
+Wait(0)
 
 workspace.Morphs:GetChildren()[i].CFrame = workspace.nintenblock12.HumanoidRootPart.CFrame  
 
+end
 end 
 end
