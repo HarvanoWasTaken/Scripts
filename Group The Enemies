@@ -5,7 +5,7 @@ for i = 1, #Enemies, 1 do
 
 wait(0)
 Enemies[i].HumanoidRootPart.CFrame = Enemies[1].HumanoidRootPart.CFrame
-Enemise[i].HumanoidRootPart.Anchored = true
+Enemies[i].HumanoidRootPart.Anchored = true
 
 end
 end
