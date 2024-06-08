@@ -5,7 +5,7 @@ for i = 1, #Enemies, 1 do
 
 wait(0)
 Enemies[i].HumanoidRootPart.Orientation = Vector3.new(0, 0, 0)
-Enemies[i].HumanoidRootPart.Position = Vector3.New(0.0828931, 13, -141.146)
+Enemies[i].HumanoidRootPart.Position = Vector3.New(0, 13, -141)
 Enemies[i].HumanoidRootPart.Anchored = true
 Enemies[i].HumanoidRootPart.CanCollide = false
 
