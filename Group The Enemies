@@ -11,5 +11,6 @@ Enemies[i].HumanoidRootPart.CanCollide = false
 end
 end
 
-workspace.Enemies.ChildAdded:Connect(GroupEnemies())
-workspace.Enemies.ChildRemoved:Connect(GroupEnemies())
+while wait(0.1) do
+GroupEnemies()
+end
