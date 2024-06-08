@@ -1,0 +1,15 @@
+local function GroupEnemies()
+
+local Enemies = workspace.Enemies:GetChildren()
+for i = 1, #Enemies, 1 do
+
+wait(0)
+Enemies[i].HumanoidRootPart.CFrame = Enemies[1].HumanoidRootPart.CFrame
+Enemise[i].HumanoidRootPart.Anchored = true
+
+end
+end
+
+while wait(0.1) do
+GroupEnemies()
+end
