@@ -4,8 +4,7 @@ local Enemies = workspace.Enemies:GetChildren()
 for i = 1, #Enemies, 1 do
 
 wait(0)
-Enemies[i].HumanoidRootPart.Orientation = Vector3.new(0, 0, 0)
-Enemies[i].HumanoidRootPart.Position = Vector3.New(0, 13, -141)
+Enemies[i].HumanoidRootPart.CFrame = CFrame.new(0.0664960146, 12.9999971, 139.981934, -0.999994516, 1.26644135e-08, -0.0033121272, 1.25043345e-08, 1, 4.83520743e-08, 0.0033121272, 4.83103939e-08, -0.999994516)
 Enemies[i].HumanoidRootPart.Anchored = true
 Enemies[i].HumanoidRootPart.CanCollide = false
 
