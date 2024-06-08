@@ -6,10 +6,10 @@ for i = 1, #Enemies, 1 do
 wait(0)
 Enemies[i].HumanoidRootPart.CFrame = Enemies[1].HumanoidRootPart.CFrame
 Enemies[i].HumanoidRootPart.Anchored = true
+Enemies[i].HumanoidRootPart.CanCollide = false
 
 end
 end
 
-while wait(0.1) do
-GroupEnemies()
-end
+workspace.Enemies.ChildAdded:Connect(GroupEnemies())
+workspace.Enemies.ChildRemoved:Connect(GroupEnemies())
