@@ -4,9 +4,6 @@ local rp = game:GetService("ReplicatedStorage")
 local attack = rp:WaitForChild("attack")
 
 uis.InputBegan:Connect(function(input)
-	if (uis:GetFocusedTextBox()) then
-		return; -- make sure player's not chatting!
-	end
 	if input.KeyCode == Enum.KeyCode.F then
 
 		for i = 1, 145, 1 do
