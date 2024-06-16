@@ -1,8 +1,6 @@
 local uis = game:GetService("UserInputService")
 local rp = game:GetService("ReplicatedStorage")
 
-local attack = rp:WaitForChild("attack")
-
 uis.InputBegan:Connect(function(input)
 	if input.KeyCode == Enum.KeyCode.F then
 
