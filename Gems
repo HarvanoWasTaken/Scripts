@@ -1,11 +1,11 @@
-while wait(0.01) do
+while wait(0.1) do
 
 for i = 1, 145, 1 do
 
 workspace.nintenblock12.HumanoidRootPart.Position = game:GetService("Workspace").Gems.Beach:GetChildren()[i].Position
 game.ReplicatedStorage.Roll:FireServer()
 
-wait(0.01)
+wait(0.1)
 
 end
 
