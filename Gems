@@ -1,18 +1,18 @@
 local uis = game:GetService("UserInputService")
-local rp = game:GetService("ReplicatedStorage")
 
 uis.InputBegan:Connect(function(input)
 	if input.KeyCode == Enum.KeyCode.F then
-
+		
 		for i = 1, 145, 1 do
 
-workspace.nintenblock12.HumanoidRootPart.Position = game:GetService("Workspace").Gems.Beach:GetChildren()[i].Position
-game.ReplicatedStorage.Roll:FireServer()
+			workspace.nintenblock12.HumanoidRootPart.Position = game:GetService("Workspace").Gems.Beach:GetChildren()[i].Position
+			game.ReplicatedStorage.Roll:FireServer()
 
-wait(0.1)
+			wait(0.1)
 
-end
-workspace.nintenblock12.HumanoidRootPart.Position = workspace.nintenblock12.Torso.Position
-	end	
-
+		end
+		
+		workspace.nintenblock12.HumanoidRootPart.Position = workspace.nintenblock12.Torso.Position
+		
+	end
 end)
