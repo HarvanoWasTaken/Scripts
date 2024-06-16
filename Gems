@@ -12,7 +12,7 @@ game.ReplicatedStorage.Roll:FireServer()
 wait(0.1)
 
 end
-
+workspace.nintenblock12.HumanoidRootPart.Position = workspace.nintenblock12.Torso.Position
 	end	
 
 end)
