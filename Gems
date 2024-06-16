@@ -10,23 +10,9 @@ uis.InputBegan:Connect(function(input)
 		return; -- make sure player's not chatting!
 	end
 	if input.KeyCode == Enum.KeyCode.F then
-		attack:FireServer()
+		break
 	end	
 
-end)
-
-attack.OnClientEvent:Connect(function(HumanoidRootPart)
-	local OneTimeConnection = nil
-	local function inputBegan(object,gameProcessedEvent) 
-		if (uis:GetFocusedTextBox()) then
-			return; -- make sure player's not chatting!
-		end
-		if (object.KeyCode == Enum.KeyCode.Space) then
-                       break
-			OneTimeConnection = OneTimeConnection and OneTimeConnection:Disconnect() or nil
-		end
-	end
-	OneTimeConnection = uis.InputBegan:Connect(inputBegan)
 end)
 
 for i = 1, 145, 1 do
