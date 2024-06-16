@@ -1,4 +1,12 @@
 while wait(0.01) do
-workspace.nintenblock12.HumanoidRootPart.Position = game:GetService("Workspace").Gems.Beach:GetChildren()[1].Position
+
+for i = 1, 145, 1 do
+
+workspace.nintenblock12.HumanoidRootPart.Position = game:GetService("Workspace").Gems.Beach:GetChildren()[i].Position
 game.ReplicatedStorage.Roll:FireServer()
+
+wait(0.01)
+
+end
+
 end
