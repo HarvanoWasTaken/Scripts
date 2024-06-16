@@ -1,4 +1,3 @@
-for i = 1, #game:GetService("Workspace").Gems.Beach:GetChildren(), 1 do
-workspace.nintenblock12.HumanoidRootPart.Position = game:GetService("Workspace").Gems.Beach:GetChildren()[i].Position
-wait(0.1)
+while wait(0.01) do
+workspace.nintenblock12.HumanoidRootPart.Position = game:GetService("Workspace").Gems.Beach:GetChildren()[1].Position
 end
