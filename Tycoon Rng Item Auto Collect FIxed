@@ -11,6 +11,6 @@ HRP.Position = Part.Hitbox.Position
 
 Wait(1)
 
-HRP.Positon = OldPos
+HRP.Position = OldPos
 
 end)
