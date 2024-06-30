@@ -11,11 +11,11 @@ local HRP = char.HumanoidRootPart
 local OldPos = HRP.Position
 
 repeat
-if Check1 ~= nil then
-HRP.Position = Check1.Position
+if Part ~= nil then
+HRP.Position = Part.HitBox.Position
 end
 wait(0.25)
-until Check1 == nil
+until Part == nil
 
 HRP.Positon = OldPos
 
