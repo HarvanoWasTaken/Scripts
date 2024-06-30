@@ -1,0 +1,23 @@
+local plr = game.Players.LocalPlayer
+
+workspace.ChildAdded:Connect(function(Part)
+
+local Check1 = Part:FindFirstChild("HitBox")
+local Check2 = Part.Classname
+
+if Check1 and Check2 == "Model" then
+local char = plr.Character
+local HRP = char.HumanoidRootPart
+local OldPos = HRP.Position
+
+repeat
+if Check1 ~= nil then
+HRP.Position = Check1
+end
+wait(0.25)
+until Check1 == nil
+
+HRP.Positon = OldPos
+
+end
+end)
