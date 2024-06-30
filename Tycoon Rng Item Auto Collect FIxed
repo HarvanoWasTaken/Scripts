@@ -5,9 +5,9 @@ workspace.ChildAdded:Connect(function(Part)
 
 local char = plr.Character
 local HRP = char.HumanoidRootPart
-local OldPos = HRP.Position
+local OldPos = char.Torso
 
-HRP.Position = Part.hitbox.Position
+HRP.Position = Part.Hitbox.Position
 
 Wait(1)
 
