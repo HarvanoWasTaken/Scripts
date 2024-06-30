@@ -7,7 +7,9 @@ local char = plr.Character
 local HRP = char.HumanoidRootPart
 local OldPos = HRP.Position
 
-HRP.Position = Part.HitBox.Position
+HRP.Position = Part.hitbox.Position
+
+Wait(1)
 
 HRP.Positon = OldPos
 
