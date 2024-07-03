@@ -22,13 +22,26 @@ end)
 
 local plr = game.Players.LocalPlayer
 
+for i = 1, #workspace:GetChildren(), 1 do
+
+if workspace:GetChildren()[i].ClassName = Model then
+if workspace:GetChildren()[i]:FindFirstChild("Hitbox")
+
+local char = plr.Character
+local HRP = char.HumanoidRootPart
+
+workspace:GetChildren()[i].Hitbox.Position = HRP.Position
+
+end
+end
+end
+
 workspace.ChildAdded:Connect(function(Part)
 
 if Part.ClassName == "Model" then
 
 local char = plr.Character
 local HRP = char.HumanoidRootPart
-local OldPos = HRP.Position
 
 Part.Hitbox.Position = HRP.Position
 end
