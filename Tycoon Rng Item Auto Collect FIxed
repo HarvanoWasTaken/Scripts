@@ -14,3 +14,21 @@ Wait(1)
 HRP.Position = OldPos
 
 end)
+
+
+
+
+
+
+local plr = game.Players.LocalPlayer
+
+workspace.ChildAdded:Connect(function(Part)
+
+
+local char = plr.Character
+local HRP = char.HumanoidRootPart
+local OldPos = HRP.Position
+
+Part.Hitbox.Position = HRP.Position
+
+end)
