@@ -24,11 +24,13 @@ local plr = game.Players.LocalPlayer
 
 workspace.ChildAdded:Connect(function(Part)
 
+if Part.ClassName == "model" then
 
 local char = plr.Character
 local HRP = char.HumanoidRootPart
 local OldPos = HRP.Position
 
 Part.Hitbox.Position = HRP.Position
+end
 
 end)
