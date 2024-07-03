@@ -24,7 +24,7 @@ local plr = game.Players.LocalPlayer
 
 for i = 1, #workspace:GetChildren(), 1 do
 
-if workspace:GetChildren()[i].ClassName = Model then
+if workspace:GetChildren()[i].ClassName == Model then
 if workspace:GetChildren()[i]:FindFirstChild("Hitbox")
 
 local char = plr.Character
