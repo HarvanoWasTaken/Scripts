@@ -24,7 +24,7 @@ local plr = game.Players.LocalPlayer
 
 workspace.ChildAdded:Connect(function(Part)
 
-if Part.ClassName == "model" then
+if Part.ClassName == "Model" then
 
 local char = plr.Character
 local HRP = char.HumanoidRootPart
