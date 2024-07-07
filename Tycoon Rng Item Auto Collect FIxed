@@ -39,11 +39,14 @@ end
 workspace.ChildAdded:Connect(function(Part)
 
 if Part.ClassName == "Model" then
+if workspace:GetChildren()[i]:FindFirstChild("Hitbox") then
 
 local char = plr.Character
 local HRP = char.HumanoidRootPart
 
 Part.Hitbox.Position = HRP.Position
+
+end
 end
 
 end)
