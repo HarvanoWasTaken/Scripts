@@ -3,7 +3,7 @@ local char = plr.Character
 local hum = char.HumanoidRootPart
 
 for _, tree in ipairs(workspace.trees:GetChildren()) do
-  for _, Object in ipairs(tree:GetChildren()) do
+  for _, Object in ipairs(tree.DroppedFood:GetChildren()) do
     hum.Position = Object.Position
     wait(0)
     wait(0)
