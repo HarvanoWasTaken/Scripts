@@ -4,6 +4,10 @@ local hum = char.HumanoidRootPart
 hum.Anchored = true
 
 for _, tree in ipairs(workspace.trees:GetChildren()) do
+  tree.dropped_food.ChildAdded:connect(function(part)
+    hum.Position = part.Position
+  end)
+
   for _, Object in ipairs(tree.dropped_food:GetChildren()) do
     hum.Position = Object.Position
     wait(0.1)
