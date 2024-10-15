@@ -1,14 +1,129 @@
-local Victim='Player name here'
+local Victim
 local A=Instance.new'Animation'
 A.AnimationId='rbxassetid://148840371'
 local P=game:GetService'Players'.LocalPlayer
 local C=P.Character or P.CharacterAdded:Wait()
 local H=C:WaitForChild'Humanoid':LoadAnimation(A)
-H:Play()
-H:AdjustSpeed(2.5)
-local Here = instance.new("attachment")
-Here.Parent = game:GetService('Players'):FindFirstChild(Victim).Character:WaitForChild('HumanoidRootPart')
-Here.Position = Vector3.new(0, 0, 1.5)
+local Doit = false
+local Here
+--// Services
+local Players = game:GetService('Players')
+local UIS = game:GetService("UserInputService")
+
+--// Variables
+local UI = Instance.new("Frame")
+UI.Parent = game.Players.LocalPlayer.PlayerGui
+UI.Size = UDim2.FromScale(0.25, 0.5)
+
+local Text = Instance.new("TextLable")
+Text.Parent = UI
+Text.Size = UDim2.FromScale(1, 0.25)
+Text.Position = UDim2.FromScale(0, 0)
+Text.Text = "funny thing"
+Text.TextScaled = true
+
+local Who = Instance.new("TextBox")
+Who.Parent = UI
+Who.Size = UDim2.FromScale(1, 0.25)
+Who.Position = UDim2.FromScale(0, 0.25)
+Who.PlaceholderText = "The player you wanna do it to"
+Who.TextScaled = true
+
+local Button = Instance.new("TextButton")
+Button.Parent = UI
+Button.Size = UDim2.FromScale(1, 0.25) 
+Button.Position = UDim2.FromScale(0, 0.5)
+Button.Text = "Do it"
+Button.TextScaled = true
+
+local Abort = Instance.new("TextButton")
+Abort.Parent = UI
+Abort.Size = UDim2.FromScale(1, 0.25)
+Abort.Position = UDim2.FromScale(0, 0.75)
+Abort.Text = "Vanish like a fart"
+Abort.TextScaled = true
+
 game:GetService'RunService'.Stepped:Connect(function()
-    C:WaitForChild('HumanoidRootPart').CFrame = Here.WoldCFrame
+    if Here then
+        C:WaitForChild('HumanoidRootPart').CFrame = Here.WorldCFrame
+    end
+end)
+
+local function changeVar(newVar)
+    if newVar then
+        Here = instance.new("Attachment")
+        Here.Parent = game:GetService('Players'):FindFirstChild(Victim).Character:WaitForChild('HumanoidRootPart')
+        Here.Position = Vector3.new(0, 0, 1.5)
+        H:Play()
+        H:AdjustSpeed(2.5)
+        Button.Text = "Stop doing it"
+        Who.TextEditable = false
+    else
+        H:Stop()
+        Here:Destroy()
+        Button.Text = "Do it"
+        Who.TextEditable = true
+    end
+    Doit = newVar
+end
+
+local Player = Players.LocalPlayer
+local Mouse = Player:GetMouse()
+
+local Hovered = false
+local Holding = false
+local MoveCon = nil
+
+local InitialX, InitialY, UIInitialPos
+
+--// Functions
+
+local function Drag()
+	if Holding == false then MoveCon:Disconnect(); return end
+	local distanceMovedX = InitialX - Mouse.X
+	local distanceMovedY = InitialY - Mouse.Y
+
+	UI.Position = UIInitialPos - UDim2.new(0, distanceMovedX, 0, distanceMovedY)
+end
+
+--// Connections
+
+UI.MouseEnter:Connect(function()
+	Hovered = true
+end)
+
+UI.MouseLeave:Connect(function()
+	Hovered = false
+end)
+
+UIS.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		Holding = Hovered
+		if Holding then
+			InitialX, InitialY = Mouse.X, Mouse.Y
+			UIInitialPos = UI.Position
+
+			MoveCon = Mouse.Move:Connect(Drag)
+		end
+	end
+end)
+
+UIS.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		Holding = false
+	end
+end)
+
+Who.FocusLost:Connect(function()
+    Victim = Who.Text
+end)
+
+Button.Activated:Connect(function()
+    if game:GetService('Players'):FindFirstChild(Victim) then
+        changeVar(not Doit)
+    end
+end)
+
+Abort.Activated:Connect(function()
+    C:WaitForChild('HumanoidRootPart').Position += Vector3.new(1000, 0- (C:WaitForChild('HumanoidRootPart').Position.Y + 10000), 1000)
 end)
