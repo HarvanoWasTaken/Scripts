@@ -48,9 +48,6 @@ Abort.Text = "Vanish like a fart"
 Abort.TextScaled = true
 
 game:GetService'RunService'.Stepped:Connect(function()
-    if game:GetService('Players'):FindFirstChild(Victim) then
-        changeVar(false)
-    end
     if Here then
         C:WaitForChild('HumanoidRootPart').CFrame = Here.WorldCFrame
     end
