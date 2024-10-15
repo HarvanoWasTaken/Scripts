@@ -46,7 +46,7 @@ Abort.Position = UDim2.fromScale(0, 0.75)
 Abort.Text = "Vanish like a fart"
 Abort.TextScaled = true
 
-game:GetService'RunService'.Stepped:Connect(function()#
+game:GetService'RunService'.Stepped:Connect(function()
     if game:GetService('Players'):FindFirstChild(Victim) then
         changeVar(false)
     end
