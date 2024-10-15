@@ -17,29 +17,29 @@ UI.Size = UDim2.FromScale(0.25, 0.5)
 
 local Text = Instance.new("TextLable")
 Text.Parent = UI
-Text.Size = UDim2.FromScale(1, 0.25)
-Text.Position = UDim2.FromScale(0, 0)
+Text.Size = UDim2.fromScale(1, 0.25)
+Text.Position = UDim2.fromScale(0, 0)
 Text.Text = "funny thing"
 Text.TextScaled = true
 
 local Who = Instance.new("TextBox")
 Who.Parent = UI
-Who.Size = UDim2.FromScale(1, 0.25)
-Who.Position = UDim2.FromScale(0, 0.25)
+Who.Size = UDim2.fromScale(1, 0.25)
+Who.Position = UDim2.fromScale(0, 0.25)
 Who.PlaceholderText = "The player you wanna do it to"
 Who.TextScaled = true
 
 local Button = Instance.new("TextButton")
 Button.Parent = UI
-Button.Size = UDim2.FromScale(1, 0.25) 
-Button.Position = UDim2.FromScale(0, 0.5)
+Button.Size = UDim2.fromScale(1, 0.25) 
+Button.Position = UDim2.fromScale(0, 0.5)
 Button.Text = "Do it"
 Button.TextScaled = true
 
 local Abort = Instance.new("TextButton")
 Abort.Parent = UI
-Abort.Size = UDim2.FromScale(1, 0.25)
-Abort.Position = UDim2.FromScale(0, 0.75)
+Abort.Size = UDim2.fromScale(1, 0.25)
+Abort.Position = UDim2.fromScale(0, 0.75)
 Abort.Text = "Vanish like a fart"
 Abort.TextScaled = true
 
