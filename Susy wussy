@@ -67,6 +67,7 @@ local function changeVar(newVar)
     else
         H:Stop()
         Here:Destroy()
+	Here = nil
         Button.Text = "Do it"
         Who.TextEditable = true
     end
