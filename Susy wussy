@@ -13,9 +13,9 @@ local UIS = game:GetService("UserInputService")
 --// Variables
 local UI = Instance.new("Frame")
 UI.Parent = game.Players.LocalPlayer.PlayerGui
-UI.Size = UDim2.FromScale(0.25, 0.5)
+UI.Size = UDim2.fromScale(0.25, 0.5)
 
-local Text = Instance.new("TextLable")
+local Text = Instance.new("TextLabel")
 Text.Parent = UI
 Text.Size = UDim2.fromScale(1, 0.25)
 Text.Position = UDim2.fromScale(0, 0)
