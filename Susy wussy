@@ -6,7 +6,7 @@ local C=P.Character or P.CharacterAdded:Wait()
 local H=C:WaitForChild'Humanoid':LoadAnimation(A)
 local Doit = false
 local Here
-p.CameraMinZoomDistance = 5
+P.CameraMinZoomDistance = 5
 --// Services
 local Players = game:GetService('Players')
 local UIS = game:GetService("UserInputService")
