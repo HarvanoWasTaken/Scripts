@@ -54,7 +54,7 @@ end)
 
 local function changeVar(newVar)
     if newVar then
-        Here = instance.new("Attachment")
+        Here = Instance.new("Attachment")
         Here.Parent = game:GetService('Players'):FindFirstChild(Victim).Character:WaitForChild('HumanoidRootPart')
         Here.Position = Vector3.new(0, 0, 1.5)
         H:Play()
