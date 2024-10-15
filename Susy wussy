@@ -128,5 +128,5 @@ Button.Activated:Connect(function()
 end)
 
 Abort.Activated:Connect(function()
-    C:WaitForChild('HumanoidRootPart').Position += Vector3.new(1000, 0- (C:WaitForChild('HumanoidRootPart').Position.Y + 10000), 1000)
+    C:WaitForChild('HumanoidRootPart').Position += Vector3.new(500, 0- (C:WaitForChild('HumanoidRootPart').Position.Y + 500), 500)
 end)
