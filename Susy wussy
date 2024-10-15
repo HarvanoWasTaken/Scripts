@@ -11,8 +11,11 @@ local Players = game:GetService('Players')
 local UIS = game:GetService("UserInputService")
 
 --// Variables
+local Gui = Instance.new("ScreenGui")
+Gui.Parent = game.Players.LocalPlayer.PlayerGui
+
 local UI = Instance.new("Frame")
-UI.Parent = game.Players.LocalPlayer.PlayerGui
+UI.Parent = Gui
 UI.Size = UDim2.fromScale(0.25, 0.5)
 
 local Text = Instance.new("TextLabel")
