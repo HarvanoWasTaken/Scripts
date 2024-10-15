@@ -8,6 +8,7 @@ H:Play()
 H:AdjustSpeed(2.5)
 local Here = instance.new("attachment")
 Here.Parent = game:GetService('Players'):FindFirstChild(Victim).Character:WaitForChild('HumanoidRootPart')
+Here.Position = Vector3.new(0, 0, 1.5)
 game:GetService'RunService'.Stepped:Connect(function()
-    C:WaitForChild'HumanoidRootPart'.CFrame=game:GetService'Players':FindFirstChild(Victim).Character:WaitForChild'HumanoidRootPart'.CFrame
+    C:WaitForChild('HumanoidRootPart').CFrame = Here.WoldCFrame
 end)
