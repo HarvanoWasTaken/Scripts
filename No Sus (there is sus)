@@ -1,0 +1,661 @@
+local plr = game.Players.LocalPlayer
+local char
+local Primary
+local hum
+local cam = workspace.CurrentCamera
+local CamTarget
+local CurrentCamTarget
+local Pos = nil
+local animationTrack
+local NewAnimationTrack
+local Executing = nil
+local Execute = nil
+local TransitionTime = 0.1
+local Transitioning = false
+local distance = 1.5
+
+plr.CharacterAdded:Connect(function(Character)
+	char = Character
+	Primary = Character:FindFirstChild("HumanoidRootPart")
+	hum = Character.Humanoid
+	if CamTarget == nil then
+		CamTarget = cam.CameraSubject
+	end
+	if Executing and Execute then
+		Execute.BackgroundColor3 = Color3.new(0.00, 0.39, 0.00)
+		Execute.Text = "Execute"
+		Executing.Value = false
+	end
+end)
+
+plr.CharacterAdded:Wait()
+
+local TrollGUI = Instance.new("ScreenGui")
+TrollGUI.Name = "TrollGUI"
+TrollGUI.ResetOnSpawn = false
+TrollGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+TrollGUI.Parent = plr.PlayerGui
+
+local Main = Instance.new("Frame")
+Main.Name = "Main"
+Main.Size = UDim2.new(0.29, 0.00, 1.00, 0.00)
+Main.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Main.BorderSizePixel = 0
+Main.BackgroundColor3 = Color3.new(0.21, 0.21, 0.21)
+Main.Visible = false
+Main.Parent = TrollGUI
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0.05, 0.00)
+UICorner.Parent = Main
+
+local PlayerText = Instance.new("TextLabel")
+PlayerText.Name = "PlayerText"
+PlayerText.TextWrapped = true
+PlayerText.BorderSizePixel = 0
+PlayerText.TextScaled = true
+PlayerText.BackgroundColor3 = Color3.new(1.00, 1.00, 1.00)
+PlayerText.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+PlayerText.TextSize = 14
+PlayerText.Size = UDim2.new(0.84, 0.00, 0.07, 0.00)
+PlayerText.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+PlayerText.Text = "Target: nil"
+PlayerText.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+PlayerText.BackgroundTransparency = 1
+PlayerText.Position = UDim2.new(0.00, 0.00, 0.10, 0.00)
+PlayerText.Parent = Main
+
+local Target = Instance.new("ObjectValue")
+Target.Name = "Target"
+Target.Parent = Main
+
+Executing = Instance.new("BoolValue")
+Executing.Name = "Executing"
+Executing.Parent = Main
+
+Execute = Instance.new("TextButton")
+Execute.Name = "Execute"
+Execute.TextWrapped = true
+Execute.BorderSizePixel = 0
+Execute.TextScaled = true
+Execute.BackgroundColor3 = Color3.new(0.00, 0.39, 0.00)
+Execute.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Execute.TextSize = 14
+Execute.Size = UDim2.new(0.95, 0.00, 0.07, 0.00)
+Execute.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+Execute.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Execute.Text = "Execute"
+Execute.Position = UDim2.new(0.02, 0.00, 0.91, 0.00)
+Execute.Parent = Main
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(1.00, 0.00)
+UICorner_1.Parent = Execute
+
+
+local ActionText = Instance.new("TextLabel")
+ActionText.Name = "ActionText"
+ActionText.TextWrapped = true
+ActionText.BorderSizePixel = 0
+ActionText.RichText = true
+ActionText.TextScaled = true
+ActionText.BackgroundColor3 = Color3.new(1.00, 1.00, 1.00)
+ActionText.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+ActionText.TextSize = 14
+ActionText.Size = UDim2.new(0.50, 0.00, 0.07, 0.00)
+ActionText.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+ActionText.Text = "Action: nil"
+ActionText.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+ActionText.BackgroundTransparency = 1
+ActionText.Position = UDim2.new(0.00, 0.00, 0.17, 0.00)
+ActionText.Parent = Main
+
+local ActionAnimation = Instance.new("Animation")
+ActionAnimation.Name = "ActionAnimation"
+ActionAnimation.Parent = Main
+
+local ChangeTarget = Instance.new("TextButton")
+ChangeTarget.Name = "ChangeTarget"
+ChangeTarget.TextWrapped = true
+ChangeTarget.BorderSizePixel = 0
+ChangeTarget.TextScaled = true
+ChangeTarget.BackgroundColor3 = Color3.new(0.33, 0.33, 0.33)
+ChangeTarget.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+ChangeTarget.TextSize = 14
+ChangeTarget.Size = UDim2.new(0.46, 0.00, 0.07, 0.00)
+ChangeTarget.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+ChangeTarget.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+ChangeTarget.Text = "Change Target"
+ChangeTarget.Position = UDim2.new(0.52, 0.00, 0.17, 0.00)
+ChangeTarget.Parent = Main
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(1.00, 0.00)
+UICorner_1.Parent = ChangeTarget
+
+local Title = Instance.new("TextLabel")
+Title.Name = "Title"
+Title.TextWrapped = true
+Title.BorderSizePixel = 0
+Title.TextScaled = true
+Title.BackgroundColor3 = Color3.new(0.33, 0.33, 0.33)
+Title.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Title.TextSize = 14
+Title.Size = UDim2.new(0.72, 0.00, 0.07, 0.00)
+Title.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Title.Text = "Trolling GUI"
+Title.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+Title.Position = UDim2.new(0.26, 0.00, 0.02, 0.00)
+Title.Parent = Main
+
+local SelectedPlayer = Instance.new("ObjectValue")
+SelectedPlayer.Name = "SelectedPlayer"
+SelectedPlayer.Parent = Main
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(1.00, 0.00)
+UICorner_1.Parent = Title
+
+local TargetIcon = Instance.new("ImageLabel")
+TargetIcon.Name = "TargetIcon"
+TargetIcon.BorderSizePixel = 0
+TargetIcon.ScaleType = Enum.ScaleType.Fit
+TargetIcon.BackgroundColor3 = Color3.new(1.00, 1.00, 1.00)
+TargetIcon.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+TargetIcon.Size = UDim2.new(0.14, 0.00, 0.07, 0.00)
+TargetIcon.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+TargetIcon.BackgroundTransparency = 1
+TargetIcon.Position = UDim2.new(0.82, 0.00, 0.10, 0.00)
+TargetIcon.Parent = Main
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0.25, 0.00)
+UICorner.Parent = TargetIcon
+
+local PlayerSelectorOn = Instance.new("BoolValue")
+PlayerSelectorOn.Name = "PlayerSelectorOn"
+PlayerSelectorOn.Value = true
+PlayerSelectorOn.Parent = Main
+
+local Actions = Instance.new("ScrollingFrame")
+Actions.Name = "Actions"
+Actions.Active = true
+Actions.BorderSizePixel = 0
+Actions.CanvasSize = UDim2.new(0.00, 0.00, 0.00, 0.00)
+Actions.AutomaticCanvasSize = Enum.AutomaticSize.Y
+Actions.BackgroundTransparency = 1
+Actions.Size = UDim2.new(0.94, 0.00, 0.69, 0.00)
+Actions.ScrollBarImageColor3 = Color3.new(0.00, 0.00, 0.00)
+Actions.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Actions.Position = UDim2.new(0.03, 0.00, 0.27, 0.00)
+Actions.Parent = Main
+
+local UIGridLayout = Instance.new("UIGridLayout")
+UIGridLayout.CellSize = UDim2.new(1.00, 0.00, 0.10, 0.00)
+UIGridLayout.Parent = Actions
+
+local Action1 = Instance.new("TextButton")
+Action1.Name = "Action1"
+Action1.TextWrapped = true
+Action1.BorderSizePixel = 0
+Action1.TextScaled = true
+Action1.BackgroundColor3 = Color3.new(0.33, 0.33, 0.33)
+Action1.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Action1.TextSize = 14
+Action1.Size = UDim2.new(0.46, 0.00, 0.07, 0.00)
+Action1.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+Action1.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Action1.Text = "nil"
+Action1.Position = UDim2.new(0.52, 0.00, 0.17, 0.00)
+Action1.Parent = Actions
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(1.00, 0.00)
+UICorner_1.Parent = Action1
+
+local NameOf = Instance.new("StringValue")
+NameOf.Name = "NameOf"
+NameOf.Value = "Butt Suck"
+NameOf.Parent = Action1
+
+local Action2 = Instance.new("TextButton")
+Action2.Name = "Action2"
+Action2.TextWrapped = true
+Action2.BorderSizePixel = 0
+Action2.TextScaled = true
+Action2.BackgroundColor3 = Color3.new(0.33, 0.33, 0.33)
+Action2.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Action2.TextSize = 14
+Action2.Size = UDim2.new(0.46, 0.00, 0.07, 0.00)
+Action2.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+Action2.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Action2.Text = "nil"
+Action2.Position = UDim2.new(0.52, 0.00, 0.17, 0.00)
+Action2.Parent = Actions
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(1.00, 0.00)
+UICorner_1.Parent = Action2
+
+local NameOf_1 = Instance.new("StringValue")
+NameOf_1.Name = "NameOf"
+NameOf_1.Value = "Butt Pound"
+NameOf_1.Parent = Action2
+
+local Action4 = Instance.new("TextButton")
+Action4.Name = "Action4"
+Action4.TextWrapped = true
+Action4.BorderSizePixel = 0
+Action4.TextScaled = true
+Action4.BackgroundColor3 = Color3.new(0.33, 0.33, 0.33)
+Action4.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Action4.TextSize = 14
+Action4.Size = UDim2.new(0.46, 0.00, 0.07, 0.00)
+Action4.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+Action4.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Action4.Text = "nil"
+Action4.Position = UDim2.new(0.52, 0.00, 0.17, 0.00)
+Action4.Parent = Actions
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(1.00, 0.00)
+UICorner_1.Parent = Action4
+
+local NameOf_1 = Instance.new("StringValue")
+NameOf_1.Name = "NameOf"
+NameOf_1.Value = "Front Pound"
+NameOf_1.Parent = Action4
+
+local Action5 = Instance.new("TextButton")
+Action5.Name = "Action5"
+Action5.TextWrapped = true
+Action5.BorderSizePixel = 0
+Action5.TextScaled = true
+Action5.BackgroundColor3 = Color3.new(0.33, 0.33, 0.33)
+Action5.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Action5.TextSize = 14
+Action5.Size = UDim2.new(0.46, 0.00, 0.07, 0.00)
+Action5.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+Action5.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Action5.Text = "nil"
+Action5.Position = UDim2.new(0.52, 0.00, 0.17, 0.00)
+Action5.Parent = Actions
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(1.00, 0.00)
+UICorner.Parent = Action5
+
+local NameOf = Instance.new("StringValue")
+NameOf.Name = "NameOf"
+NameOf.Value = "Front Suck"
+NameOf.Parent = Action5
+
+local Action3 = Instance.new("TextButton")
+Action3.Name = "Action3"
+Action3.TextWrapped = true
+Action3.BorderSizePixel = 0
+Action3.TextScaled = true
+Action3.BackgroundColor3 = Color3.new(0.33, 0.33, 0.33)
+Action3.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Action3.TextSize = 14
+Action3.Size = UDim2.new(0.46, 0.00, 0.07, 0.00)
+Action3.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+Action3.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Action3.Text = "nil"
+Action3.Position = UDim2.new(0.52, 0.00, 0.17, 0.00)
+Action3.Parent = Actions
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(1.00, 0.00)
+UICorner_1.Parent = Action3
+
+local NameOf_1 = Instance.new("StringValue")
+NameOf_1.Name = "NameOf"
+NameOf_1.Value = "Mouth Pound"
+NameOf_1.Parent = Action3
+
+local OpenClose = Instance.new("TextButton")
+OpenClose.Name = "OpenClose"
+OpenClose.TextWrapped = true
+OpenClose.BorderSizePixel = 0
+OpenClose.TextScaled = true
+OpenClose.BackgroundColor3 = Color3.new(0.00, 1.00, 0.00)
+OpenClose.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+OpenClose.TextSize = 14
+OpenClose.Size = UDim2.new(0.06, 0.00, 0.10, 0.00)
+OpenClose.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+OpenClose.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+OpenClose.Text = "Open"
+OpenClose.Parent = TrollGUI
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(1.00, 0.00)
+UICorner_1.Parent = OpenClose
+
+local PlayerSelector = Instance.new("Frame")
+PlayerSelector.Name = "PlayerSelector"
+PlayerSelector.Size = UDim2.new(0.29, 0.00, 0.97, 0.00)
+PlayerSelector.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+PlayerSelector.Position = UDim2.new(0.71, 0.00, 0.02, 0.00)
+PlayerSelector.BorderSizePixel = 0
+PlayerSelector.BackgroundColor3 = Color3.new(0.21, 0.21, 0.21)
+PlayerSelector.Visible = false
+PlayerSelector.Parent = TrollGUI
+
+local Players = Instance.new("ScrollingFrame")
+Players.Name = "Players"
+Players.Active = true
+Players.BorderSizePixel = 0
+Players.CanvasSize = UDim2.new(0.00, 0.00, 0.00, 0.00)
+Players.AutomaticCanvasSize = Enum.AutomaticSize.Y
+Players.BackgroundColor3 = Color3.new(0.21, 0.21, 0.21)
+Players.Size = UDim2.new(0.94, 0.00, 0.84, 0.00)
+Players.ScrollBarImageColor3 = Color3.new(0.00, 0.00, 0.00)
+Players.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Players.Position = UDim2.new(0.03, 0.00, 0.12, 0.00)
+Players.Parent = PlayerSelector
+
+local UIGridLayout_1 = Instance.new("UIGridLayout")
+UIGridLayout_1.CellSize = UDim2.new(1.00, 0.00, 0.10, 0.00)
+UIGridLayout_1.Parent = Players
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(0.10, 0.00)
+UICorner_1.Parent = PlayerSelector
+
+local Close = Instance.new("TextButton")
+Close.Name = "Close"
+Close.TextWrapped = true
+Close.BorderSizePixel = 0
+Close.TextScaled = true
+Close.BackgroundColor3 = Color3.new(1.00, 0.00, 0.00)
+Close.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Close.TextSize = 14
+Close.Size = UDim2.new(0.22, 0.00, 0.11, 0.00)
+Close.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+Close.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Close.Text = "Close"
+Close.Position = UDim2.new(0.79, 0.00, 0.00, 0.00)
+Close.Parent = PlayerSelector
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(1.00, 0.00)
+UICorner_1.Parent = Close
+
+local Title_1 = Instance.new("TextLabel")
+Title_1.Name = "Title"
+Title_1.TextWrapped = true
+Title_1.BorderSizePixel = 0
+Title_1.TextScaled = true
+Title_1.BackgroundColor3 = Color3.new(0.33, 0.33, 0.33)
+Title_1.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Title_1.TextSize = 14
+Title_1.Size = UDim2.new(0.72, 0.00, 0.07, 0.00)
+Title_1.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Title_1.Text = "Choose Player"
+Title_1.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+Title_1.Position = UDim2.new(0.05, 0.00, 0.02, 0.00)
+Title_1.Parent = PlayerSelector
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(1.00, 0.00)
+UICorner_1.Parent = Title_1
+
+
+
+local Template = Instance.new("Frame")
+Template.Name = "Template"
+Template.Visible = false
+Template.Size = UDim2.new(0.97, 0.00, 0.06, 0.00)
+Template.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Template.BorderSizePixel = 0
+Template.BackgroundColor3 = Color3.new(0.33, 0.33, 0.33)
+Template.Parent = TrollGUI
+
+local NameOf_1 = Instance.new("TextButton")
+NameOf_1.Name = "NameOf"
+NameOf_1.TextWrapped = true
+NameOf_1.BorderSizePixel = 0
+NameOf_1.AutoButtonColor = false
+NameOf_1.TextScaled = true
+NameOf_1.BackgroundColor3 = Color3.new(1.00, 1.00, 1.00)
+NameOf_1.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+NameOf_1.TextSize = 14
+NameOf_1.Size = UDim2.new(0.82, 0.00, 1.00, 0.00)
+NameOf_1.TextColor3 = Color3.new(0.00, 0.00, 0.00)
+NameOf_1.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+NameOf_1.Text = "nil"
+NameOf_1.BackgroundTransparency = 1
+NameOf_1.TextXAlignment = Enum.TextXAlignment.Left
+NameOf_1.Parent = Template
+
+local Icon = Instance.new("ImageButton")
+Icon.Name = "Icon"
+Icon.BorderSizePixel = 0
+Icon.ScaleType = Enum.ScaleType.Fit
+Icon.BackgroundColor3 = Color3.new(1.00, 1.00, 1.00)
+Icon.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+Icon.Size = UDim2.new(0.18, 0.00, 1.00, 0.00)
+Icon.BorderColor3 = Color3.new(0.00, 0.00, 0.00)
+Icon.BackgroundTransparency = 1
+Icon.Position = UDim2.new(0.82, 0.00, 0.00, 0.00)
+Icon.Parent = Template
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0.25, 0.00)
+UICorner.Parent = Icon
+
+local UICorner_1 = Instance.new("UICorner")
+UICorner_1.CornerRadius = UDim.new(0.25, 0.00)
+UICorner_1.Parent = Template
+
+local PlayerObject = Instance.new("ObjectValue")
+PlayerObject.Name = "PlayerObject"
+PlayerObject.Parent = Template
+
+
+-- Code --
+local Animations = {
+	138008096231546,
+	108978091111367,
+	80575117595812,
+	114899631696858,
+	101657527779872
+}
+local PlayersButtons = {}
+
+local function UpdateButtons()
+	SelectedPlayer.Value = plr
+	PlayersButtons = {}
+	
+	for _, i in ipairs(Players:GetChildren()) do
+		if i:IsA("GuiObject") then
+			i:Destroy()
+		end
+	end
+	
+	for _, player in ipairs(game.Players:GetChildren()) do
+		if plr ~= player then
+			local ImageSize = Enum.ThumbnailSize.Size420x420 -- Thumbnail Size
+			local ImageType = Enum.ThumbnailType.HeadShot -- Thumbnail Type
+
+			local ThumbNail = game.Players:GetUserThumbnailAsync(player.UserId, ImageType, ImageSize) -- Gets Image from UserId
+			
+			local button = Template:Clone()
+			button.Parent = Players
+			button.Name = player.Name
+			button.Icon.Image = ThumbNail
+			button.NameOf.Text = player.Name
+			button.PlayerObject.Value = player
+			button.Visible = true
+			
+			table.insert(PlayersButtons, {[player.Name] = button})
+			
+			button.Icon.Activated:Connect(function()
+				Target.Value = player
+				PlayerSelector.Visible = false
+				SelectedPlayer.Value = plr
+				if Pos then
+					if Executing.Value then
+						Pos.Parent = player.Character.HumanoidRootPart
+					else
+						Pos:Destroy()
+					end
+				end
+			end)
+			button.NameOf.Activated:Connect(function()
+				Target.Value = player
+				PlayerSelector.Visible = false
+				SelectedPlayer.Value = plr
+				if Pos then
+					if Executing.Value then
+						Pos.Parent = player.Character.HumanoidRootPart
+					else
+						Pos:Destroy()
+					end
+				end
+			end)
+			
+			button.MouseEnter:Connect(function()
+				SelectedPlayer.Value = player
+			end)
+		end
+	end
+end
+
+local function switchToAnim(anim, transitionTime, Hum)
+	-- switch animation		
+	if (anim ~= ActionAnimation.AnimationId) then
+		if (animationTrack ~= nil) then
+			animationTrack:Stop(transitionTime)
+			animationTrack:Destroy()
+		end
+
+		ActionAnimation.AnimationId = anim
+		-- load it to the humanoid; get AnimationTrack
+		animationTrack = Hum:LoadAnimation(ActionAnimation)
+		animationTrack.Priority = Enum.AnimationPriority.Core
+
+		-- play the animation
+		animationTrack:Play(transitionTime)
+	end
+end
+
+for i = 1, #Actions:GetChildren(), 1 do
+	if Actions:FindFirstChild("Action" .. tostring(i)) then
+		local Button = Actions:FindFirstChild("Action" .. tostring(i))
+		Button.Text = Button.NameOf.Value
+		
+		Button.Activated:Connect(function()
+			ActionText.Text = "Action: " .. Button.NameOf.Value
+			if Executing.Value then
+				Transitioning = true
+				switchToAnim("rbxassetid://" .. tostring(Animations[i]), TransitionTime, hum)
+				wait(TransitionTime)
+				Transitioning = false
+			else
+				ActionAnimation.AnimationId = "rbxassetid://" .. tostring(Animations[i])
+				animationTrack = hum:LoadAnimation(ActionAnimation)
+			end
+		end)
+	end
+end
+
+PlayerSelector.MouseLeave:Connect(function()
+	SelectedPlayer.Value = plr
+end)
+
+UpdateButtons()
+game.Players.ChildAdded:Connect(UpdateButtons)
+game.Players.ChildRemoved:Connect(UpdateButtons)
+
+Close.Activated:Connect(function()
+	PlayerSelector.Visible = false
+end)
+
+ChangeTarget.Activated:Connect(function()
+	PlayerSelector.Visible = true
+end)
+
+OpenClose.Activated:Connect(function()
+	if Main.Visible then
+		OpenClose.BackgroundColor3 = Color3.new(0, 1, 0)
+		OpenClose.Text = "Open"
+		Main.Visible = false
+	else
+		OpenClose.BackgroundColor3 = Color3.new(1, 0, 0)
+		OpenClose.Text = "Close"
+		Main.Visible = true
+	end
+end)
+
+Target.Changed:Connect(function(val)
+	if val then
+		PlayerText.Text = val.Name
+		local ImageSize = Enum.ThumbnailSize.Size420x420 -- Thumbnail Size
+		local ImageType = Enum.ThumbnailType.HeadShot -- Thumbnail Type
+
+		local ThumbNail = game.Players:GetUserThumbnailAsync(Target.Value.UserId, ImageType, ImageSize) -- Gets Image from UserId
+		TargetIcon.Image = ThumbNail
+	end
+end)
+
+Execute.Activated:Connect(function()
+	if Executing.Value then
+		Execute.BackgroundColor3 = Color3.new(0.00, 0.39, 0.00)
+		Execute.Text = "Execute"
+		Executing.Value = false
+		
+		for _,v in pairs(hum:GetPlayingAnimationTracks()) do
+			v:Stop()
+		end
+		
+	elseif ActionAnimation.AnimationId and Target.Value then
+		Execute.BackgroundColor3 = Color3.new(0.5, 0, 0.00)
+		Execute.Text = "Stop"
+		Executing.Value = true
+		animationTrack:Play()
+	end
+end)
+
+game["Run Service"].Heartbeat:Connect(function()
+	if Executing.Value then
+		for i,v in pairs(hum:GetPlayingAnimationTracks()) do
+			if v ~= animationTrack then
+				v:Stop()
+			end
+		end
+		
+		if Target.Value.Character then
+			if Target.Value.Character.HumanoidRootPart then
+				if Pos then
+					if Pos.Parent then
+						Pos.Parent = Target.Value.Character.HumanoidRootPart
+					else
+						Pos:Destroy()
+					end
+				else
+					Pos = Instance.new("Attachment")
+					Pos.Parent = Target.Value.Character.HumanoidRootPart
+					Pos.Position = Vector3.new(0, 0, 0 - distance)
+					Pos.Orientation = Vector3.new(0, 180, 0)
+				end
+			end
+		end
+		
+		
+		if ActionAnimation.AnimationId ~= nil then
+			Primary.CFrame = Pos.WorldCFrame
+		end
+		
+		if not animationTrack.IsPlaying and not Transitioning then
+			animationTrack:Play()
+		end
+	end
+	
+	if SelectedPlayer.Value then
+		cam.CameraSubject = SelectedPlayer.Value.Character.Humanoid
+	else
+		cam.CameraSubject = plr.Character.Humanoid
+	end	
+end)
